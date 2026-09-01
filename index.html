@@ -1,0 +1,2417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0,
+  user-scalable=no, viewport-fit=cover"
+>
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="History Timeline">
+
+<title>History Timeline</title>
+
+<style>
+
+:root {
+  --bg: #f6f8fc;
+  --card: #ffffff;
+  --navy: #10204d;
+  --blue: #1769e0;
+  --blue-light: #eaf2ff;
+  --text: #111b33;
+  --gray: #69738a;
+  --border: #dfe5ef;
+  --red: #d83a44;
+  --green: #16845b;
+  --shadow: 0 5px 18px rgba(15, 31, 73, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "SF Pro Text",
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+
+body {
+  overscroll-behavior-y: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(.98);
+}
+
+/* HEADER */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(246, 248, 252, .94);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  padding:
+    calc(env(safe-area-inset-top) + 14px)
+    16px
+    12px;
+  border-bottom: 1px solid rgba(0,0,0,.05);
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.appTitle {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.7px;
+  color: var(--navy);
+}
+
+.headerButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.iconButton {
+  border: 0;
+  background: var(--blue-light);
+  color: var(--blue);
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  font-size: 23px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* SEARCH */
+
+.searchWrap {
+  margin-top: 13px;
+}
+
+.searchInput {
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  outline: none;
+  font-size: 16px;
+}
+
+.searchInput:focus {
+  border-color: var(--blue);
+}
+
+/* NAV */
+
+.tabs {
+  display: flex;
+  padding: 10px 10px 5px;
+  gap: 7px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  flex: 1;
+  min-width: 90px;
+  border: 0;
+  background: transparent;
+  color: var(--gray);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tab.active {
+  background: #fff;
+  color: var(--blue);
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+}
+
+/* MAIN */
+
+main {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 10px 15px 110px;
+}
+
+.empty {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  margin-top: 25px;
+  padding: 34px 20px;
+  text-align: center;
+  color: var(--gray);
+}
+
+.emptyTitle {
+  color: var(--navy);
+  font-size: 21px;
+  font-weight: 750;
+  margin-bottom: 8px;
+}
+
+/* TIMELINE */
+
+.timeline {
+  position: relative;
+  padding-top: 12px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 21px;
+  top: 10px;
+  bottom: 20px;
+  width: 3px;
+  border-radius: 10px;
+  background: #cbd9ee;
+}
+
+.timelineItem {
+  position: relative;
+  padding-left: 52px;
+  margin-bottom: 17px;
+}
+
+.timelineDot {
+  position: absolute;
+  left: 13px;
+  top: 23px;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  border: 4px solid var(--bg);
+  box-shadow: 0 0 0 2px #b8c9e4;
+  background: var(--blue);
+}
+
+.timelineItem.person .timelineDot {
+  background: var(--green);
+}
+
+.itemCard {
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.itemCardButton {
+  border: 0;
+  background: transparent;
+  padding: 16px;
+  width: 100%;
+  text-align: left;
+}
+
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.typeBadge {
+  display: inline-block;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: .5px;
+  padding: 6px 8px;
+  border-radius: 20px;
+  color: var(--blue);
+  background: var(--blue-light);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.typeBadge.person {
+  color: var(--green);
+  background: #e6f6ef;
+}
+
+.cardTitle {
+  font-size: 19px;
+  font-weight: 760;
+  line-height: 1.22;
+  color: var(--navy);
+}
+
+.cardDate {
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 5px;
+}
+
+.photoIndicator {
+  flex-shrink: 0;
+  min-width: 34px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 8px;
+  color: var(--gray);
+  background: #f1f4f8;
+  border-radius: 10px;
+}
+
+.previewText {
+  color: var(--gray);
+  font-size: 14px;
+  line-height: 1.45;
+  margin-top: 10px;
+}
+
+/* LIST VIEW */
+
+.sectionHeading {
+  color: var(--navy);
+  font-size: 22px;
+  font-weight: 800;
+  margin: 17px 2px 12px;
+}
+
+.listCard {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  margin-bottom: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.035);
+}
+
+.listCard button {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 15px;
+  text-align: left;
+}
+
+.listTitle {
+  font-size: 18px;
+  color: var(--navy);
+  font-weight: 750;
+}
+
+.listDate {
+  margin-top: 4px;
+  color: var(--gray);
+  font-size: 13px;
+}
+
+/* FLOATING ADD BUTTON */
+
+.addButton {
+  position: fixed;
+  z-index: 70;
+  right: 22px;
+  bottom: calc(env(safe-area-inset-bottom) + 22px);
+  border: 0;
+  background: var(--blue);
+  color: #fff;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  font-size: 34px;
+  line-height: 1;
+  box-shadow: 0 8px 23px rgba(23,105,224,.36);
+}
+
+/* MODALS */
+
+.modalOverlay {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background: rgba(5,13,32,.44);
+  display: none;
+  align-items: flex-end;
+}
+
+.modalOverlay.visible {
+  display: flex;
+}
+
+.modal {
+  width: 100%;
+  max-height: 94vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 24px 24px 0 0;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 18px);
+  animation: slideUp .22s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(25%);
+    opacity: .5;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modalHandle {
+  width: 42px;
+  height: 5px;
+  border-radius: 10px;
+  background: #d3d7df;
+  margin: 9px auto 2px;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 17px;
+  border-bottom: 1px solid var(--border);
+}
+
+.modalTitle {
+  color: var(--navy);
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.closeButton {
+  border: 0;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #eff1f5;
+  color: #50596d;
+  font-size: 19px;
+}
+
+.modalContent {
+  padding: 18px;
+}
+
+.field {
+  margin-bottom: 17px;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 750;
+  color: var(--navy);
+  margin: 0 0 7px 2px;
+}
+
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: #fff;
+  padding: 12px;
+  font-size: 16px;
+  outline: none;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 130px;
+  line-height: 1.45;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: var(--blue);
+}
+
+.smallHelp {
+  color: var(--gray);
+  font-size: 12px;
+  line-height: 1.4;
+  margin-top: 6px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.primaryButton {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 14px;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 750;
+  font-size: 16px;
+}
+
+.secondaryButton {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 13px;
+  background: #fff;
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.dangerButton {
+  border-color: #ffd3d5;
+  color: var(--red);
+}
+
+/* DETAIL VIEW */
+
+.detailTop {
+  position: relative;
+}
+
+.detailType {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--blue);
+  letter-spacing: .6px;
+}
+
+.detailType.person {
+  color: var(--green);
+}
+
+.detailTitle {
+  color: var(--navy);
+  font-size: 28px;
+  font-weight: 820;
+  letter-spacing: -.5px;
+  line-height: 1.1;
+  margin-top: 6px;
+  padding-right: 60px;
+}
+
+.detailDate {
+  color: var(--blue);
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.editMiniButton {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: 0;
+  border-radius: 12px;
+  color: var(--blue);
+  background: var(--blue-light);
+  padding: 8px 10px;
+  font-weight: 700;
+}
+
+/* GALLERY */
+
+.gallery {
+  margin: 21px -18px 0;
+  background: #101318;
+  overflow: hidden;
+  position: relative;
+}
+
+.galleryTrack {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.galleryTrack::-webkit-scrollbar {
+  display: none;
+}
+
+.gallerySlide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  height: 330px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallerySlide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.galleryCount {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  color: white;
+  background: rgba(0,0,0,.58);
+  font-size: 12px;
+  padding: 5px 9px;
+  border-radius: 15px;
+}
+
+.descriptionHeading {
+  color: var(--navy);
+  font-size: 16px;
+  font-weight: 800;
+  margin: 22px 0 8px;
+}
+
+.detailDescription {
+  font-size: 16px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+/* PHOTO EDITOR */
+
+.photoPreviewGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  margin-top: 11px;
+}
+
+.photoPreview {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 11px;
+  overflow: hidden;
+  background: #e8ecf2;
+}
+
+.photoPreview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.removePhoto {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  width: 25px;
+  height: 25px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0,0,0,.68);
+  color: white;
+  font-weight: bold;
+}
+
+/* SETTINGS */
+
+.settingsSection {
+  border-top: 1px solid var(--border);
+  margin-top: 19px;
+  padding-top: 19px;
+}
+
+.settingsHeading {
+  color: var(--navy);
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.fileButton {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 13px;
+  background: #fff;
+  text-align: center;
+  color: var(--navy);
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+#importFile {
+  display: none;
+}
+
+@media (min-width: 700px) {
+
+  .modalOverlay {
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+  }
+
+  .modal {
+    max-width: 650px;
+    border-radius: 24px;
+    max-height: 90vh;
+  }
+
+  .modalHandle {
+    display: none;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="headerRow">
+
+    <div class="appTitle">
+      History
+    </div>
+
+    <div class="headerButtons">
+
+      <button
+        class="iconButton"
+        id="settingsButton"
+        aria-label="Settings"
+      >
+        ⋯
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="searchWrap">
+    <input
+      id="searchInput"
+      class="searchInput"
+      type="search"
+      placeholder="Search history..."
+      autocomplete="off"
+    >
+  </div>
+
+  <div class="tabs">
+
+    <button class="tab active" data-view="timeline">
+      Timeline
+    </button>
+
+    <button class="tab" data-view="events">
+      Events
+    </button>
+
+    <button class="tab" data-view="people">
+      People
+    </button>
+
+  </div>
+
+</header>
+
+<main id="mainContent"></main>
+
+<button
+  class="addButton"
+  id="addButton"
+  aria-label="Add historical entry"
+>
+  +
+</button>
+
+
+<!-- DETAIL MODAL -->
+
+<div class="modalOverlay" id="detailOverlay">
+
+  <div class="modal">
+
+    <div class="modalHandle"></div>
+
+    <div class="modalHeader">
+
+      <div class="modalTitle">
+        History
+      </div>
+
+      <button class="closeButton" data-close="detailOverlay">
+        ×
+      </button>
+
+    </div>
+
+    <div class="modalContent" id="detailContent"></div>
+
+  </div>
+
+</div>
+
+
+<!-- ADD / EDIT MODAL -->
+
+<div class="modalOverlay" id="editorOverlay">
+
+  <div class="modal">
+
+    <div class="modalHandle"></div>
+
+    <div class="modalHeader">
+
+      <div class="modalTitle" id="editorTitle">
+        Add Entry
+      </div>
+
+      <button class="closeButton" data-close="editorOverlay">
+        ×
+      </button>
+
+    </div>
+
+    <div class="modalContent">
+
+      <form id="entryForm">
+
+        <input type="hidden" id="entryId">
+
+        <div class="field">
+
+          <label>
+            Type
+          </label>
+
+          <select id="entryType">
+
+            <option value="event">
+              Historical Event
+            </option>
+
+            <option value="person">
+              Historical Person
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Name / Title
+          </label>
+
+          <input
+            id="entryName"
+            type="text"
+            placeholder="e.g. American Revolution"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Display Date
+          </label>
+
+          <input
+            id="dateLabel"
+            type="text"
+            placeholder="e.g. 1775–1783"
+          >
+
+          <div class="smallHelp">
+            This is the date shown on screen. You can enter a year,
+            range, or description such as "44 BCE" or "July 4, 1776."
+          </div>
+
+        </div>
+
+
+        <div class="formRow">
+
+          <div class="field">
+
+            <label>
+              Timeline Year
+            </label>
+
+            <input
+              id="sortYear"
+              type="number"
+              step="1"
+              placeholder="1776"
+              required
+            >
+
+          </div>
+
+          <div class="field">
+
+            <label>
+              Era
+            </label>
+
+            <select id="era">
+
+              <option value="CE">
+                CE
+              </option>
+
+              <option value="BCE">
+                BCE
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+        <div class="smallHelp" style="margin-top:-11px;margin-bottom:17px;">
+          Timeline Year controls where the item appears chronologically.
+          For 44 BCE, enter 44 and choose BCE.
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Significance / Description
+          </label>
+
+          <textarea
+            id="description"
+            placeholder="Explain who this person was or why this event was historically important..."
+          ></textarea>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Photo Library
+          </label>
+
+          <input
+            id="photoInput"
+            type="file"
+            accept="image/*"
+            multiple
+          >
+
+          <div class="smallHelp">
+            You may select several images. Swipe through them when
+            viewing the historical entry.
+          </div>
+
+          <div
+            id="photoPreviewGrid"
+            class="photoPreviewGrid"
+          ></div>
+
+        </div>
+
+
+        <button class="primaryButton" type="submit">
+          Save
+        </button>
+
+        <button
+          class="secondaryButton dangerButton"
+          type="button"
+          id="deleteEntryButton"
+          style="display:none;margin-top:10px;"
+        >
+          Delete Entry
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- SETTINGS MODAL -->
+
+<div class="modalOverlay" id="settingsOverlay">
+
+  <div class="modal">
+
+    <div class="modalHandle"></div>
+
+    <div class="modalHeader">
+
+      <div class="modalTitle">
+        Settings
+      </div>
+
+      <button class="closeButton" data-close="settingsOverlay">
+        ×
+      </button>
+
+    </div>
+
+    <div class="modalContent">
+
+      <div class="settingsHeading">
+        Database
+      </div>
+
+      <p style="color:var(--gray);line-height:1.5;">
+        Your historical entries and photographs are stored locally
+        on this device.
+      </p>
+
+      <button
+        class="secondaryButton"
+        id="exportButton"
+      >
+        Export Backup
+      </button>
+
+      <label class="fileButton">
+        Import Backup
+        <input
+          type="file"
+          id="importFile"
+          accept=".json,application/json"
+        >
+      </label>
+
+      <div class="settingsSection">
+
+        <button
+          class="secondaryButton dangerButton"
+          id="eraseButton"
+        >
+          Erase Entire Database
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* ==========================================================
+   DATABASE
+========================================================== */
+
+const DB_NAME = "HistoryTimelineDB";
+const STORE_NAME = "entries";
+const DB_VERSION = 1;
+
+let db;
+
+let entries = [];
+
+let currentView = "timeline";
+
+let editingPhotos = [];
+
+let currentGalleryIndex = 0;
+
+
+/* ==========================================================
+   OPEN DATABASE
+========================================================== */
+
+function openDatabase() {
+
+  return new Promise((resolve, reject) => {
+
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+    request.onupgradeneeded = event => {
+
+      const database = event.target.result;
+
+      if (!database.objectStoreNames.contains(STORE_NAME)) {
+
+        database.createObjectStore(
+          STORE_NAME,
+          {
+            keyPath: "id",
+            autoIncrement: true
+          }
+        );
+
+      }
+
+    };
+
+    request.onsuccess = event => {
+
+      db = event.target.result;
+
+      resolve();
+
+    };
+
+    request.onerror = () => reject(request.error);
+
+  });
+
+}
+
+
+/* ==========================================================
+   LOAD DATABASE
+========================================================== */
+
+function loadEntries() {
+
+  return new Promise((resolve, reject) => {
+
+    const transaction =
+      db.transaction(STORE_NAME, "readonly");
+
+    const store =
+      transaction.objectStore(STORE_NAME);
+
+    const request =
+      store.getAll();
+
+    request.onsuccess = () => {
+
+      entries = request.result || [];
+
+      resolve(entries);
+
+    };
+
+    request.onerror = () => reject(request.error);
+
+  });
+
+}
+
+
+/* ==========================================================
+   SAVE ENTRY
+========================================================== */
+
+function saveEntry(entry) {
+
+  return new Promise((resolve, reject) => {
+
+    const transaction =
+      db.transaction(STORE_NAME, "readwrite");
+
+    const store =
+      transaction.objectStore(STORE_NAME);
+
+    let request;
+
+    if (entry.id) {
+
+      request = store.put(entry);
+
+    } else {
+
+      delete entry.id;
+
+      request = store.add(entry);
+
+    }
+
+    request.onsuccess = () => resolve(request.result);
+
+    request.onerror = () => reject(request.error);
+
+  });
+
+}
+
+
+/* ==========================================================
+   DELETE ENTRY
+========================================================== */
+
+function deleteEntry(id) {
+
+  return new Promise((resolve, reject) => {
+
+    const transaction =
+      db.transaction(STORE_NAME, "readwrite");
+
+    const store =
+      transaction.objectStore(STORE_NAME);
+
+    const request =
+      store.delete(id);
+
+    request.onsuccess = resolve;
+
+    request.onerror = () => reject(request.error);
+
+  });
+
+}
+
+
+/* ==========================================================
+   SORT VALUE
+========================================================== */
+
+function chronologicalValue(entry) {
+
+  const year = Number(entry.sortYear) || 0;
+
+  if (entry.era === "BCE") {
+
+    return -year;
+
+  }
+
+  return year;
+
+}
+
+
+/* ==========================================================
+   ESCAPE HTML
+========================================================== */
+
+function escapeHTML(value = "") {
+
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+/* ==========================================================
+   SHORT DESCRIPTION
+========================================================== */
+
+function shortDescription(text = "") {
+
+  const cleaned = text.trim();
+
+  if (cleaned.length <= 145) {
+    return cleaned;
+  }
+
+  return cleaned.slice(0, 145) + "…";
+
+}
+
+
+/* ==========================================================
+   SEARCH
+========================================================== */
+
+function getFilteredEntries() {
+
+  const query =
+    document
+      .getElementById("searchInput")
+      .value
+      .trim()
+      .toLowerCase();
+
+  if (!query) {
+
+    return [...entries];
+
+  }
+
+  return entries.filter(entry => {
+
+    return (
+      entry.name.toLowerCase().includes(query) ||
+      (entry.description || "")
+        .toLowerCase()
+        .includes(query) ||
+      (entry.dateLabel || "")
+        .toLowerCase()
+        .includes(query)
+    );
+
+  });
+
+}
+
+
+/* ==========================================================
+   RENDER
+========================================================== */
+
+function render() {
+
+  const container =
+    document.getElementById("mainContent");
+
+  const filtered =
+    getFilteredEntries();
+
+  if (currentView === "timeline") {
+
+    renderTimeline(container, filtered);
+
+  }
+
+  if (currentView === "events") {
+
+    renderList(
+      container,
+      filtered.filter(x => x.type === "event"),
+      "Historical Events"
+    );
+
+  }
+
+  if (currentView === "people") {
+
+    renderList(
+      container,
+      filtered.filter(x => x.type === "person"),
+      "Important People"
+    );
+
+  }
+
+}
+
+
+/* ==========================================================
+   TIMELINE
+========================================================== */
+
+function renderTimeline(container, list) {
+
+  list.sort(
+    (a, b) =>
+      chronologicalValue(a) -
+      chronologicalValue(b)
+  );
+
+  if (!list.length) {
+
+    container.innerHTML = `
+
+      <div class="empty">
+
+        <div class="emptyTitle">
+          Your timeline is empty
+        </div>
+
+        Tap the + button to add your first historical
+        event or important person.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+  let html = `<div class="timeline">`;
+
+  for (const entry of list) {
+
+    const photoCount =
+      entry.photos?.length || 0;
+
+    html += `
+
+      <div
+        class="timelineItem ${entry.type}"
+      >
+
+        <div class="timelineDot"></div>
+
+        <div class="itemCard">
+
+          <button
+            class="itemCardButton"
+            onclick="showDetails(${entry.id})"
+          >
+
+            <div class="cardTop">
+
+              <div>
+
+                <div
+                  class="typeBadge ${entry.type}"
+                >
+                  ${
+                    entry.type === "person"
+                      ? "Person"
+                      : "Event"
+                  }
+                </div>
+
+                <div class="cardTitle">
+                  ${escapeHTML(entry.name)}
+                </div>
+
+                <div class="cardDate">
+                  ${escapeHTML(entry.dateLabel || "")}
+                </div>
+
+              </div>
+
+              ${
+                photoCount
+                  ? `
+                    <div class="photoIndicator">
+                      📷 ${photoCount}
+                    </div>
+                  `
+                  : ""
+              }
+
+            </div>
+
+            ${
+              entry.description
+                ? `
+                  <div class="previewText">
+                    ${escapeHTML(
+                      shortDescription(entry.description)
+                    )}
+                  </div>
+                `
+                : ""
+            }
+
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+  html += `</div>`;
+
+  container.innerHTML = html;
+
+}
+
+
+/* ==========================================================
+   EVENTS / PEOPLE LIST
+========================================================== */
+
+function renderList(container, list, heading) {
+
+  list.sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+
+  let html = `
+
+    <div class="sectionHeading">
+      ${heading}
+    </div>
+
+  `;
+
+  if (!list.length) {
+
+    html += `
+
+      <div class="empty">
+
+        <div class="emptyTitle">
+          Nothing here yet
+        </div>
+
+        Tap the + button to add an entry.
+
+      </div>
+
+    `;
+
+    container.innerHTML = html;
+
+    return;
+
+  }
+
+  for (const entry of list) {
+
+    html += `
+
+      <div class="listCard">
+
+        <button
+          onclick="showDetails(${entry.id})"
+        >
+
+          <div class="listTitle">
+            ${escapeHTML(entry.name)}
+          </div>
+
+          <div class="listDate">
+            ${escapeHTML(entry.dateLabel || "")}
+          </div>
+
+        </button>
+
+      </div>
+
+    `;
+
+  }
+
+  container.innerHTML = html;
+
+}
+
+
+/* ==========================================================
+   SHOW DETAILS
+========================================================== */
+
+function showDetails(id) {
+
+  const entry =
+    entries.find(x => x.id === id);
+
+  if (!entry) {
+    return;
+  }
+
+  currentGalleryIndex = 0;
+
+  const content =
+    document.getElementById("detailContent");
+
+  let galleryHTML = "";
+
+  if (entry.photos && entry.photos.length) {
+
+    galleryHTML = `
+
+      <div class="gallery">
+
+        <div
+          class="galleryTrack"
+          id="galleryTrack"
+        >
+
+    `;
+
+    entry.photos.forEach((photo, index) => {
+
+      galleryHTML += `
+
+        <div class="gallerySlide">
+
+          <img
+            src="${photo}"
+            alt="${escapeHTML(entry.name)} photo ${index + 1}"
+          >
+
+        </div>
+
+      `;
+
+    });
+
+    galleryHTML += `
+
+        </div>
+
+        <div class="galleryCount" id="galleryCount">
+          1 / ${entry.photos.length}
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+  content.innerHTML = `
+
+    <div class="detailTop">
+
+      <div
+        class="detailType ${entry.type}"
+      >
+        ${
+          entry.type === "person"
+            ? "Historical Person"
+            : "Historical Event"
+        }
+      </div>
+
+      <div class="detailTitle">
+        ${escapeHTML(entry.name)}
+      </div>
+
+      <div class="detailDate">
+        ${escapeHTML(entry.dateLabel || "")}
+      </div>
+
+      <button
+        class="editMiniButton"
+        onclick="openEditor(${entry.id})"
+      >
+        Edit
+      </button>
+
+    </div>
+
+    ${galleryHTML}
+
+    <div class="descriptionHeading">
+      Significance
+    </div>
+
+    <div class="detailDescription">
+      ${
+        escapeHTML(entry.description || "No description added yet.")
+      }
+    </div>
+
+  `;
+
+  openModal("detailOverlay");
+
+  const gallery =
+    document.getElementById("galleryTrack");
+
+  if (gallery) {
+
+    gallery.addEventListener(
+      "scroll",
+      () => {
+
+        const width =
+          gallery.clientWidth;
+
+        const index =
+          Math.round(
+            gallery.scrollLeft / width
+          );
+
+        currentGalleryIndex = index;
+
+        const count =
+          document.getElementById("galleryCount");
+
+        if (count) {
+
+          count.textContent =
+            `${index + 1} / ${entry.photos.length}`;
+
+        }
+
+      }
+    );
+
+  }
+
+}
+
+
+/* ==========================================================
+   EDITOR
+========================================================== */
+
+function openEditor(id = null) {
+
+  closeModal("detailOverlay");
+
+  const form =
+    document.getElementById("entryForm");
+
+  form.reset();
+
+  editingPhotos = [];
+
+  document.getElementById("entryId").value = "";
+
+  document.getElementById("editorTitle").textContent =
+    id ? "Edit Entry" : "Add Entry";
+
+  document.getElementById("deleteEntryButton").style.display =
+    id ? "block" : "none";
+
+  if (id) {
+
+    const entry =
+      entries.find(x => x.id === id);
+
+    if (!entry) {
+      return;
+    }
+
+    document.getElementById("entryId").value =
+      entry.id;
+
+    document.getElementById("entryType").value =
+      entry.type;
+
+    document.getElementById("entryName").value =
+      entry.name;
+
+    document.getElementById("dateLabel").value =
+      entry.dateLabel || "";
+
+    document.getElementById("sortYear").value =
+      entry.sortYear;
+
+    document.getElementById("era").value =
+      entry.era || "CE";
+
+    document.getElementById("description").value =
+      entry.description || "";
+
+    editingPhotos =
+      [...(entry.photos || [])];
+
+  }
+
+  renderPhotoPreviews();
+
+  openModal("editorOverlay");
+
+}
+
+
+/* ==========================================================
+   PHOTO SELECTION
+========================================================== */
+
+document
+  .getElementById("photoInput")
+  .addEventListener(
+    "change",
+    async event => {
+
+      const files =
+        Array.from(event.target.files);
+
+      for (const file of files) {
+
+        try {
+
+          const image =
+            await resizeImage(file);
+
+          editingPhotos.push(image);
+
+        } catch (error) {
+
+          console.error(error);
+
+        }
+
+      }
+
+      renderPhotoPreviews();
+
+      event.target.value = "";
+
+    }
+  );
+
+
+/* ==========================================================
+   IMAGE RESIZING
+========================================================== */
+
+function resizeImage(file) {
+
+  return new Promise((resolve, reject) => {
+
+    const reader =
+      new FileReader();
+
+    reader.onload = event => {
+
+      const img =
+        new Image();
+
+      img.onload = () => {
+
+        const MAX =
+          1800;
+
+        let width =
+          img.width;
+
+        let height =
+          img.height;
+
+        if (width > height && width > MAX) {
+
+          height *= MAX / width;
+
+          width = MAX;
+
+        }
+
+        else if (height > MAX) {
+
+          width *= MAX / height;
+
+          height = MAX;
+
+        }
+
+        const canvas =
+          document.createElement("canvas");
+
+        canvas.width =
+          Math.round(width);
+
+        canvas.height =
+          Math.round(height);
+
+        const ctx =
+          canvas.getContext("2d");
+
+        ctx.drawImage(
+          img,
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+
+        resolve(
+          canvas.toDataURL(
+            "image/jpeg",
+            .84
+          )
+        );
+
+      };
+
+      img.onerror = reject;
+
+      img.src =
+        event.target.result;
+
+    };
+
+    reader.onerror =
+      reject;
+
+    reader.readAsDataURL(file);
+
+  });
+
+}
+
+
+/* ==========================================================
+   PHOTO PREVIEWS
+========================================================== */
+
+function renderPhotoPreviews() {
+
+  const grid =
+    document.getElementById("photoPreviewGrid");
+
+  grid.innerHTML =
+    editingPhotos
+      .map(
+        (photo, index) => `
+
+          <div class="photoPreview">
+
+            <img src="${photo}">
+
+            <button
+              type="button"
+              class="removePhoto"
+              onclick="removeEditingPhoto(${index})"
+            >
+              ×
+            </button>
+
+          </div>
+
+        `
+      )
+      .join("");
+
+}
+
+
+function removeEditingPhoto(index) {
+
+  editingPhotos.splice(index, 1);
+
+  renderPhotoPreviews();
+
+}
+
+
+/* ==========================================================
+   SAVE FORM
+========================================================== */
+
+document
+  .getElementById("entryForm")
+  .addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+      const idValue =
+        document.getElementById("entryId").value;
+
+      const entry = {
+
+        type:
+          document.getElementById("entryType").value,
+
+        name:
+          document.getElementById("entryName")
+            .value
+            .trim(),
+
+        dateLabel:
+          document.getElementById("dateLabel")
+            .value
+            .trim(),
+
+        sortYear:
+          Number(
+            document.getElementById("sortYear")
+              .value
+          ),
+
+        era:
+          document.getElementById("era").value,
+
+        description:
+          document.getElementById("description")
+            .value
+            .trim(),
+
+        photos:
+          editingPhotos,
+
+        updated:
+          Date.now()
+
+      };
+
+      if (idValue) {
+
+        entry.id =
+          Number(idValue);
+
+      }
+
+      await saveEntry(entry);
+
+      await loadEntries();
+
+      closeModal("editorOverlay");
+
+      render();
+
+    }
+  );
+
+
+/* ==========================================================
+   DELETE CURRENT ENTRY
+========================================================== */
+
+document
+  .getElementById("deleteEntryButton")
+  .addEventListener(
+    "click",
+    async () => {
+
+      const id =
+        Number(
+          document.getElementById("entryId").value
+        );
+
+      if (!id) {
+        return;
+      }
+
+      const entry =
+        entries.find(x => x.id === id);
+
+      if (!entry) {
+        return;
+      }
+
+      const confirmed =
+        confirm(
+          `Delete "${entry.name}"?`
+        );
+
+      if (!confirmed) {
+        return;
+      }
+
+      await deleteEntry(id);
+
+      await loadEntries();
+
+      closeModal("editorOverlay");
+
+      render();
+
+    }
+  );
+
+
+/* ==========================================================
+   MODALS
+========================================================== */
+
+function openModal(id) {
+
+  document
+    .getElementById(id)
+    .classList
+    .add("visible");
+
+}
+
+
+function closeModal(id) {
+
+  document
+    .getElementById(id)
+    .classList
+    .remove("visible");
+
+}
+
+
+document
+  .querySelectorAll("[data-close]")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        closeModal(
+          button.dataset.close
+        );
+
+      }
+    );
+
+  });
+
+
+document
+  .querySelectorAll(".modalOverlay")
+  .forEach(overlay => {
+
+    overlay.addEventListener(
+      "click",
+      event => {
+
+        if (event.target === overlay) {
+
+          closeModal(
+            overlay.id
+          );
+
+        }
+
+      }
+    );
+
+  });
+
+
+/* ==========================================================
+   NAVIGATION TABS
+========================================================== */
+
+document
+  .querySelectorAll(".tab")
+  .forEach(tab => {
+
+    tab.addEventListener(
+      "click",
+      () => {
+
+        document
+          .querySelectorAll(".tab")
+          .forEach(x =>
+            x.classList.remove("active")
+          );
+
+        tab.classList.add("active");
+
+        currentView =
+          tab.dataset.view;
+
+        render();
+
+      }
+    );
+
+  });
+
+
+/* ==========================================================
+   SEARCH
+========================================================== */
+
+document
+  .getElementById("searchInput")
+  .addEventListener(
+    "input",
+    render
+  );
+
+
+/* ==========================================================
+   ADD
+========================================================== */
+
+document
+  .getElementById("addButton")
+  .addEventListener(
+    "click",
+    () => openEditor()
+  );
+
+
+/* ==========================================================
+   SETTINGS
+========================================================== */
+
+document
+  .getElementById("settingsButton")
+  .addEventListener(
+    "click",
+    () => openModal("settingsOverlay")
+  );
+
+
+/* ==========================================================
+   EXPORT
+========================================================== */
+
+document
+  .getElementById("exportButton")
+  .addEventListener(
+    "click",
+    () => {
+
+      const backup = {
+
+        version: 1,
+
+        created:
+          new Date().toISOString(),
+
+        entries
+
+      };
+
+      const blob =
+        new Blob(
+          [
+            JSON.stringify(
+              backup,
+              null,
+              2
+            )
+          ],
+          {
+            type: "application/json"
+          }
+        );
+
+      const url =
+        URL.createObjectURL(blob);
+
+      const link =
+        document.createElement("a");
+
+      link.href =
+        url;
+
+      link.download =
+        "history-timeline-backup.json";
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      link.remove();
+
+      URL.revokeObjectURL(url);
+
+    }
+  );
+
+
+/* ==========================================================
+   IMPORT
+========================================================== */
+
+document
+  .getElementById("importFile")
+  .addEventListener(
+    "change",
+    async event => {
+
+      const file =
+        event.target.files[0];
+
+      if (!file) {
+        return;
+      }
+
+      try {
+
+        const text =
+          await file.text();
+
+        const data =
+          JSON.parse(text);
+
+        const importedEntries =
+          Array.isArray(data)
+            ? data
+            : data.entries;
+
+        if (!Array.isArray(importedEntries)) {
+
+          throw new Error(
+            "Invalid backup file."
+          );
+
+        }
+
+        const confirmed =
+          confirm(
+            "Import these entries into your existing database?"
+          );
+
+        if (!confirmed) {
+          return;
+        }
+
+        for (const item of importedEntries) {
+
+          const copy = {
+            ...item
+          };
+
+          delete copy.id;
+
+          await saveEntry(copy);
+
+        }
+
+        await loadEntries();
+
+        closeModal("settingsOverlay");
+
+        render();
+
+        alert("Import complete.");
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+        alert(
+          "This does not appear to be a valid History Timeline backup."
+        );
+
+      }
+
+      event.target.value = "";
+
+    }
+  );
+
+
+/* ==========================================================
+   ERASE DATABASE
+========================================================== */
+
+document
+  .getElementById("eraseButton")
+  .addEventListener(
+    "click",
+    async () => {
+
+      const confirmed =
+        confirm(
+          "Erase every historical event, person, description, and photograph?"
+        );
+
+      if (!confirmed) {
+        return;
+      }
+
+      const second =
+        confirm(
+          "This cannot be undone unless you have exported a backup. Continue?"
+        );
+
+      if (!second) {
+        return;
+      }
+
+      const transaction =
+        db.transaction(
+          STORE_NAME,
+          "readwrite"
+        );
+
+      transaction
+        .objectStore(STORE_NAME)
+        .clear();
+
+      transaction.oncomplete =
+        async () => {
+
+          await loadEntries();
+
+          closeModal(
+            "settingsOverlay"
+          );
+
+          render();
+
+        };
+
+    }
+  );
+
+
+/* ==========================================================
+   START APP
+========================================================== */
+
+async function initializeApp() {
+
+  try {
+
+    await openDatabase();
+
+    await loadEntries();
+
+    render();
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+    document.getElementById(
+      "mainContent"
+    ).innerHTML = `
+
+      <div class="empty">
+
+        <div class="emptyTitle">
+          Database Error
+        </div>
+
+        The history database could not be opened.
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+initializeApp();
+
+</script>
+
+</body>
+</html>
