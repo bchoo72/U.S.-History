@@ -11,9 +11,9 @@
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="History Timeline">
+<meta name="apple-mobile-web-app-title" content="History">
 
-<title>History Timeline</title>
+<title>History</title>
 
 <style>
 
@@ -28,7 +28,7 @@
   --border: #dfe5ef;
   --red: #d83a44;
   --green: #16845b;
-  --shadow: 0 5px 18px rgba(15, 31, 73, 0.08);
+  --shadow: 0 5px 18px rgba(15,31,73,.08);
 }
 
 * {
@@ -72,47 +72,60 @@ button:active {
   transform: scale(.98);
 }
 
-/* HEADER */
+/* =========================================================
+   HEADER
+========================================================= */
 
 header {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(246, 248, 252, .95);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  background: rgba(246,248,252,.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
   padding:
     calc(env(safe-area-inset-top) + 14px)
     16px
     10px;
+
   border-bottom: 1px solid rgba(0,0,0,.05);
 }
 
 .headerRow {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 
 .appTitle {
-  font-size: 28px;
-  font-weight: 800;
+  font-size: 29px;
+  font-weight: 820;
   color: var(--navy);
-  letter-spacing: -.6px;
+  letter-spacing: -.7px;
+}
+
+.headerButtons {
+  display: flex;
+  gap: 8px;
 }
 
 .iconButton {
-  border: 0;
-  background: var(--blue-light);
-  color: var(--blue);
   width: 42px;
   height: 42px;
+  border: 0;
   border-radius: 14px;
-  font-size: 23px;
-  font-weight: 700;
+
+  background: var(--blue-light);
+  color: var(--blue);
+
+  font-size: 22px;
+  font-weight: 750;
 }
 
-/* SEARCH */
+/* =========================================================
+   SEARCH
+========================================================= */
 
 .searchWrap {
   margin-top: 12px;
@@ -120,11 +133,15 @@ header {
 
 .searchInput {
   width: 100%;
-  padding: 12px 14px;
-  border-radius: 14px;
   border: 1px solid var(--border);
-  background: #fff;
+  border-radius: 14px;
+
+  background: white;
+
+  padding: 12px 14px;
+
   outline: none;
+
   font-size: 16px;
 }
 
@@ -132,13 +149,18 @@ header {
   border-color: var(--blue);
 }
 
-/* FILTER TABS */
+/* =========================================================
+   TABS
+========================================================= */
 
 .tabs {
   display: flex;
   gap: 7px;
-  overflow-x: auto;
+
   padding-top: 10px;
+
+  overflow-x: auto;
+
   scrollbar-width: none;
 }
 
@@ -148,212 +170,346 @@ header {
 
 .tab {
   border: 0;
+
   background: transparent;
+
   color: var(--gray);
+
   padding: 9px 13px;
+
   border-radius: 12px;
+
   white-space: nowrap;
-  font-weight: 700;
+
+  font-weight: 720;
 }
 
 .tab.active {
   background: white;
   color: var(--blue);
-  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+
+  box-shadow:
+    0 2px 10px rgba(0,0,0,.06);
 }
 
-/* MAIN */
+/* =========================================================
+   MAIN
+========================================================= */
 
 main {
+  width: 100%;
   max-width: 760px;
+
   margin: auto;
-  padding: 12px 15px 110px;
+
+  padding:
+    12px
+    15px
+    110px;
 }
 
-/* EMPTY */
+/* =========================================================
+   EMPTY
+========================================================= */
 
 .empty {
-  background: #fff;
-  border: 1px solid var(--border);
+  background: white;
+
+  border:
+    1px solid var(--border);
+
   border-radius: 20px;
-  padding: 35px 20px;
+
   margin-top: 24px;
+
+  padding:
+    35px 20px;
+
   text-align: center;
+
   color: var(--gray);
 }
 
 .emptyTitle {
   color: var(--navy);
+
   font-size: 21px;
+
   font-weight: 800;
+
   margin-bottom: 7px;
 }
 
-/* TIMELINE */
+/* =========================================================
+   TIMELINE
+========================================================= */
 
 .timeline {
   position: relative;
+
   padding-top: 10px;
 }
 
 .timeline::before {
   content: "";
+
   position: absolute;
+
   left: 21px;
   top: 12px;
   bottom: 18px;
+
   width: 3px;
+
   border-radius: 10px;
+
   background: #cbd9ee;
 }
 
 .timelineItem {
   position: relative;
+
   padding-left: 52px;
+
   margin-bottom: 16px;
 }
 
 .timelineDot {
   position: absolute;
+
   left: 13px;
   top: 22px;
+
   width: 19px;
   height: 19px;
+
   border-radius: 50%;
+
   border: 4px solid var(--bg);
-  box-shadow: 0 0 0 2px #b8c9e4;
+
+  box-shadow:
+    0 0 0 2px #b8c9e4;
+
   background: var(--blue);
 }
 
 .itemCard {
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
+
   background: white;
+
   border-radius: 18px;
+
   overflow: hidden;
+
   box-shadow: var(--shadow);
 }
 
 .itemCardButton {
   width: 100%;
-  background: transparent;
+
   border: 0;
+
+  background: transparent;
+
   text-align: left;
+
   padding: 16px;
 }
 
 .cardTop {
   display: flex;
-  justify-content: space-between;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    flex-start;
+
   gap: 12px;
 }
 
 .typeBadge {
   display: inline-block;
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .5px;
-  color: var(--blue);
-  background: var(--blue-light);
-  padding: 6px 8px;
+
+  padding:
+    6px 8px;
+
   border-radius: 20px;
+
+  background:
+    var(--blue-light);
+
+  color:
+    var(--blue);
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: .5px;
+
+  text-transform: uppercase;
+
   margin-bottom: 8px;
 }
 
 .cardTitle {
   color: var(--navy);
+
   font-size: 19px;
+
   font-weight: 780;
+
   line-height: 1.25;
 }
 
 .cardDate {
   color: var(--blue);
-  margin-top: 5px;
+
   font-size: 14px;
+
   font-weight: 700;
+
+  margin-top: 5px;
 }
 
 .previewText {
   color: var(--gray);
+
   font-size: 14px;
+
   line-height: 1.5;
+
   margin-top: 10px;
 }
 
 .photoIndicator {
   flex-shrink: 0;
-  padding: 6px 8px;
+
   background: #f1f4f8;
-  border-radius: 10px;
+
   color: var(--gray);
+
+  padding:
+    6px 8px;
+
+  border-radius: 10px;
+
   font-size: 13px;
+
   font-weight: 700;
 }
 
-/* LIST */
+/* =========================================================
+   LISTS
+========================================================= */
 
 .sectionHeading {
   color: var(--navy);
+
   font-size: 22px;
+
   font-weight: 800;
-  margin: 16px 2px 12px;
+
+  margin:
+    16px 2px
+    12px;
 }
 
 .listCard {
   background: white;
-  border: 1px solid var(--border);
+
+  border:
+    1px solid var(--border);
+
   border-radius: 17px;
+
   margin-bottom: 10px;
+
   overflow: hidden;
 }
 
 .listCard button {
-  border: 0;
-  background: transparent;
   width: 100%;
+
+  border: 0;
+
+  background: transparent;
+
   padding: 15px;
+
   text-align: left;
 }
 
 .listTitle {
   color: var(--navy);
+
   font-size: 18px;
+
   font-weight: 760;
 }
 
 .listMeta {
-  margin-top: 5px;
-  font-size: 13px;
   color: var(--gray);
+
+  font-size: 13px;
+
+  margin-top: 5px;
 }
 
-/* ADD */
+/* =========================================================
+   ADD BUTTON
+========================================================= */
 
 .addButton {
   position: fixed;
-  z-index: 80;
+
   right: 22px;
-  bottom: calc(env(safe-area-inset-bottom) + 22px);
+
+  bottom:
+    calc(
+      env(safe-area-inset-bottom) + 22px
+    );
+
+  z-index: 80;
+
   width: 62px;
   height: 62px;
-  border-radius: 50%;
+
   border: 0;
+
+  border-radius: 50%;
+
   background: var(--blue);
+
   color: white;
+
   font-size: 34px;
-  box-shadow: 0 8px 24px rgba(23,105,224,.35);
+
+  box-shadow:
+    0 8px 24px
+    rgba(23,105,224,.35);
 }
 
-/* MODAL */
+/* =========================================================
+   MODAL
+========================================================= */
 
 .modalOverlay {
   position: fixed;
+
   inset: 0;
+
   z-index: 1000;
+
   display: none;
+
   align-items: flex-end;
-  background: rgba(5,13,32,.45);
+
+  background:
+    rgba(5,13,32,.45);
 }
 
 .modalOverlay.visible {
@@ -361,43 +517,72 @@ main {
 }
 
 .modal {
-  background: white;
   width: 100%;
+
   max-height: 94vh;
+
   overflow-y: auto;
-  border-radius: 24px 24px 0 0;
-  padding-bottom: calc(env(safe-area-inset-bottom) + 18px);
+
+  background: white;
+
+  border-radius:
+    24px 24px 0 0;
+
+  padding-bottom:
+    calc(
+      env(safe-area-inset-bottom)
+      + 18px
+    );
 }
 
 .modalHandle {
   width: 42px;
+
   height: 5px;
-  background: #d3d7df;
+
   border-radius: 10px;
-  margin: 9px auto 2px;
+
+  background: #d3d7df;
+
+  margin:
+    9px auto 2px;
 }
 
 .modalHeader {
   display: flex;
+
+  justify-content:
+    space-between;
+
   align-items: center;
-  justify-content: space-between;
-  padding: 13px 17px;
-  border-bottom: 1px solid var(--border);
+
+  padding:
+    13px 17px;
+
+  border-bottom:
+    1px solid var(--border);
 }
 
 .modalTitle {
   color: var(--navy);
+
   font-size: 21px;
+
   font-weight: 800;
 }
 
 .closeButton {
   width: 35px;
   height: 35px;
+
   border: 0;
+
   border-radius: 50%;
+
   background: #eff1f5;
+
   color: #50596d;
+
   font-size: 20px;
 }
 
@@ -405,7 +590,9 @@ main {
   padding: 18px;
 }
 
-/* FORM */
+/* =========================================================
+   FORMS
+========================================================= */
 
 .field {
   margin-bottom: 17px;
@@ -413,27 +600,41 @@ main {
 
 .field label {
   display: block;
+
   color: var(--navy);
+
   font-size: 13px;
+
   font-weight: 750;
-  margin: 0 0 7px 2px;
+
+  margin:
+    0 0 7px 2px;
 }
 
 .field input,
 .field textarea,
 .field select {
   width: 100%;
-  border: 1px solid var(--border);
+
+  border:
+    1px solid var(--border);
+
   border-radius: 13px;
-  background: white;
+
   padding: 12px;
-  outline: none;
+
+  background: white;
+
   font-size: 16px;
+
+  outline: none;
 }
 
 .field textarea {
   min-height: 130px;
+
   resize: vertical;
+
   line-height: 1.5;
 }
 
@@ -445,111 +646,166 @@ main {
 
 .formRow {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   gap: 10px;
 }
 
 .smallHelp {
   color: var(--gray);
+
   font-size: 12px;
-  line-height: 1.4;
+
+  line-height: 1.45;
+
   margin-top: 6px;
 }
 
 .primaryButton,
 .secondaryButton {
   width: 100%;
+
   border-radius: 14px;
+
   padding: 14px;
-  font-weight: 750;
+
   font-size: 16px;
+
+  font-weight: 750;
 }
 
 .primaryButton {
   border: 0;
+
   background: var(--blue);
+
   color: white;
 }
 
 .secondaryButton {
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
+
   background: white;
+
   color: var(--navy);
 }
 
 .dangerButton {
   border-color: #ffd3d5;
+
   color: var(--red);
 }
 
-/* DETAILS */
+/* =========================================================
+   DETAILS
+========================================================= */
 
 .detailTop {
   position: relative;
 }
 
 .detailType {
-  font-size: 12px;
-  text-transform: uppercase;
-  font-weight: 800;
   color: var(--blue);
+
+  font-size: 12px;
+
+  font-weight: 800;
+
   letter-spacing: .6px;
+
+  text-transform: uppercase;
 }
 
 .detailTitle {
   color: var(--navy);
+
   font-size: 28px;
+
   font-weight: 820;
-  letter-spacing: -.5px;
+
   line-height: 1.12;
+
+  letter-spacing: -.5px;
+
   margin-top: 6px;
+
   padding-right: 65px;
 }
 
 .detailDate {
   color: var(--blue);
+
   font-weight: 700;
+
   margin-top: 8px;
 }
 
 .editMiniButton {
   position: absolute;
-  right: 0;
+
   top: 0;
+  right: 0;
+
   border: 0;
+
   border-radius: 12px;
-  background: var(--blue-light);
+
+  padding:
+    8px 10px;
+
+  background:
+    var(--blue-light);
+
   color: var(--blue);
-  padding: 8px 10px;
+
   font-weight: 700;
 }
 
 .descriptionHeading {
   color: var(--navy);
+
   font-size: 16px;
+
   font-weight: 800;
-  margin: 22px 0 8px;
+
+  margin:
+    22px 0 8px;
 }
 
 .detailDescription {
   font-size: 16px;
+
   line-height: 1.6;
+
   white-space: pre-wrap;
 }
 
-/* GALLERY */
+/* =========================================================
+   GALLERY
+========================================================= */
 
 .gallery {
-  margin: 20px -18px 0;
-  background: #101318;
-  overflow: hidden;
   position: relative;
+
+  margin:
+    20px -18px 0;
+
+  background: #101318;
+
+  overflow: hidden;
 }
 
 .galleryTrack {
   display: flex;
+
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
+
+  scroll-snap-type:
+    x mandatory;
+
   scrollbar-width: none;
 }
 
@@ -558,137 +814,316 @@ main {
 }
 
 .gallerySlide {
-  flex: 0 0 100%;
+  flex:
+    0 0 100%;
+
   height: 330px;
-  scroll-snap-align: start;
+
   display: flex;
-  align-items: center;
-  justify-content: center;
+
+  justify-content:
+    center;
+
+  align-items:
+    center;
+
+  scroll-snap-align:
+    start;
 }
 
 .gallerySlide img {
   width: 100%;
   height: 100%;
+
   object-fit: contain;
 }
 
 .galleryCount {
   position: absolute;
+
   right: 10px;
   bottom: 10px;
+
+  background:
+    rgba(0,0,0,.58);
+
   color: white;
-  background: rgba(0,0,0,.58);
-  padding: 5px 9px;
+
+  padding:
+    5px 9px;
+
   border-radius: 15px;
+
   font-size: 12px;
 }
 
-/* PHOTOS */
+/* =========================================================
+   PHOTOS
+========================================================= */
 
 .photoPreviewGrid {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
+
   gap: 7px;
+
   margin-top: 11px;
 }
 
 .photoPreview {
   position: relative;
+
   aspect-ratio: 1;
-  overflow: hidden;
+
   border-radius: 11px;
+
+  overflow: hidden;
+
   background: #e8ecf2;
 }
 
 .photoPreview img {
   width: 100%;
   height: 100%;
+
   object-fit: cover;
 }
 
 .removePhoto {
   position: absolute;
+
   right: 4px;
   top: 4px;
+
   width: 25px;
   height: 25px;
+
   border: 0;
+
   border-radius: 50%;
-  background: rgba(0,0,0,.7);
+
+  background:
+    rgba(0,0,0,.7);
+
   color: white;
 }
 
-/* CATEGORY MANAGER */
+/* =========================================================
+   CATEGORIES
+========================================================= */
 
 .categoryRow {
   display: flex;
+
   align-items: center;
+
   gap: 8px;
-  border-bottom: 1px solid var(--border);
-  padding: 10px 0;
+
+  padding:
+    10px 0;
+
+  border-bottom:
+    1px solid var(--border);
 }
 
 .categoryName {
   flex: 1;
-  font-weight: 700;
+
   color: var(--navy);
+
+  font-weight: 700;
 }
 
 .smallAction {
   border: 0;
+
   border-radius: 10px;
-  padding: 7px 9px;
-  background: var(--blue-light);
+
+  padding:
+    7px 9px;
+
+  background:
+    var(--blue-light);
+
   color: var(--blue);
+
+  font-size: 13px;
+
   font-weight: 700;
 }
 
 .smallDanger {
   background: #fff0f1;
+
   color: var(--red);
 }
 
-/* SETTINGS */
+/* =========================================================
+   SETTINGS
+========================================================= */
 
 .settingsSection {
-  border-top: 1px solid var(--border);
+  border-top:
+    1px solid var(--border);
+
   margin-top: 18px;
+
   padding-top: 18px;
 }
 
 .settingsHeading {
   color: var(--navy);
+
   font-weight: 800;
+
   margin-bottom: 10px;
 }
 
 .fileButton {
   display: block;
+
   width: 100%;
-  border: 1px solid var(--border);
+
+  border:
+    1px solid var(--border);
+
   border-radius: 14px;
+
   padding: 13px;
-  text-align: center;
-  color: var(--navy);
-  font-weight: 700;
+
   margin-top: 10px;
+
+  text-align: center;
+
+  color: var(--navy);
+
+  font-weight: 700;
 }
 
 #importFile {
   display: none;
 }
 
+/* =========================================================
+   BULK IMPORT
+========================================================= */
+
+.importTextArea {
+  width: 100%;
+
+  min-height: 270px;
+
+  resize: vertical;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 14px;
+
+  padding: 13px;
+
+  outline: none;
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    monospace;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+.importTextArea:focus {
+  border-color: var(--blue);
+}
+
+.importFormat {
+  background: #f3f6fb;
+
+  border-radius: 13px;
+
+  padding: 12px;
+
+  margin-bottom: 15px;
+
+  color: var(--gray);
+
+  font-size: 12px;
+
+  line-height: 1.5;
+
+  overflow-wrap: anywhere;
+}
+
+.importPreview {
+  margin-top: 17px;
+}
+
+.importPreviewCard {
+  border:
+    1px solid var(--border);
+
+  border-radius: 13px;
+
+  padding: 12px;
+
+  margin-bottom: 8px;
+
+  background: #fafbfe;
+}
+
+.importPreviewTitle {
+  color: var(--navy);
+
+  font-weight: 750;
+}
+
+.importPreviewMeta {
+  color: var(--gray);
+
+  font-size: 12px;
+
+  margin-top: 4px;
+}
+
+.importError {
+  color: var(--red);
+
+  background: #fff4f4;
+
+  padding: 10px;
+
+  border-radius: 10px;
+
+  margin-bottom: 8px;
+
+  font-size: 13px;
+}
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
 @media (min-width:700px) {
 
   .modalOverlay {
     align-items: center;
+
     justify-content: center;
+
     padding: 30px;
   }
 
   .modal {
     max-width: 650px;
+
     border-radius: 24px;
+
     max-height: 90vh;
   }
 
@@ -711,15 +1146,29 @@ main {
       History
     </div>
 
-    <button
-      class="iconButton"
-      id="settingsButton"
-      aria-label="Settings"
-    >
-      ⋯
-    </button>
+    <div class="headerButtons">
+
+      <button
+        class="iconButton"
+        id="bulkImportTopButton"
+        aria-label="Bulk Import"
+        title="Bulk Import"
+      >
+        ↓
+      </button>
+
+      <button
+        class="iconButton"
+        id="settingsButton"
+        aria-label="Settings"
+      >
+        ⋯
+      </button>
+
+    </div>
 
   </div>
+
 
   <div class="searchWrap">
 
@@ -733,7 +1182,11 @@ main {
 
   </div>
 
-  <div class="tabs" id="tabsContainer"></div>
+
+  <div
+    class="tabs"
+    id="tabsContainer"
+  ></div>
 
 </header>
 
@@ -744,14 +1197,21 @@ main {
 <button
   class="addButton"
   id="addButton"
+  aria-label="Add Entry"
 >
   +
 </button>
 
 
-<!-- DETAIL -->
 
-<div class="modalOverlay" id="detailOverlay">
+<!-- =====================================================
+     DETAIL MODAL
+===================================================== -->
+
+<div
+  class="modalOverlay"
+  id="detailOverlay"
+>
 
   <div class="modal">
 
@@ -772,16 +1232,25 @@ main {
 
     </div>
 
-    <div class="modalContent" id="detailContent"></div>
+    <div
+      class="modalContent"
+      id="detailContent"
+    ></div>
 
   </div>
 
 </div>
 
 
-<!-- ENTRY EDITOR -->
 
-<div class="modalOverlay" id="editorOverlay">
+<!-- =====================================================
+     ENTRY EDITOR
+===================================================== -->
+
+<div
+  class="modalOverlay"
+  id="editorOverlay"
+>
 
   <div class="modal">
 
@@ -789,7 +1258,10 @@ main {
 
     <div class="modalHeader">
 
-      <div class="modalTitle" id="editorTitle">
+      <div
+        class="modalTitle"
+        id="editorTitle"
+      >
         Add Entry
       </div>
 
@@ -802,11 +1274,16 @@ main {
 
     </div>
 
+
     <div class="modalContent">
 
       <form id="entryForm">
 
-        <input type="hidden" id="entryId">
+        <input
+          type="hidden"
+          id="entryId"
+        >
+
 
         <div class="field">
 
@@ -831,7 +1308,7 @@ main {
           <input
             id="entryName"
             type="text"
-            placeholder="e.g. Battle of Hastings"
+            placeholder="e.g. Vietnam War"
             required
           >
 
@@ -847,11 +1324,11 @@ main {
           <input
             id="dateLabel"
             type="text"
-            placeholder="e.g. October 14, 1066"
+            placeholder="e.g. 1955–1975"
           >
 
           <div class="smallHelp">
-            This is exactly how the date will appear.
+            This is the date shown to you in the app.
           </div>
 
         </div>
@@ -868,11 +1345,13 @@ main {
             <input
               id="sortYear"
               type="number"
-              placeholder="1066"
+              step="1"
+              placeholder="1955"
               required
             >
 
           </div>
+
 
           <div class="field">
 
@@ -905,7 +1384,7 @@ main {
 
           <textarea
             id="description"
-            placeholder="Explain why this person, event, place, object, document, date, etc. is historically important..."
+            placeholder="Explain why this is historically important..."
           ></textarea>
 
         </div>
@@ -925,7 +1404,7 @@ main {
           >
 
           <div class="smallHelp">
-            Add several images. Swipe through them when viewing the entry.
+            Add several images. You can swipe through them when viewing the entry.
           </div>
 
           <div
@@ -942,6 +1421,7 @@ main {
         >
           Save Entry
         </button>
+
 
         <button
           class="secondaryButton dangerButton"
@@ -961,9 +1441,101 @@ main {
 </div>
 
 
-<!-- SETTINGS -->
 
-<div class="modalOverlay" id="settingsOverlay">
+<!-- =====================================================
+     BULK IMPORT
+===================================================== -->
+
+<div
+  class="modalOverlay"
+  id="bulkImportOverlay"
+>
+
+  <div class="modal">
+
+    <div class="modalHandle"></div>
+
+    <div class="modalHeader">
+
+      <div class="modalTitle">
+        Bulk Import
+      </div>
+
+      <button
+        class="closeButton"
+        data-close="bulkImportOverlay"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modalContent">
+
+      <div class="importFormat">
+
+        <strong>Format:</strong><br><br>
+
+        Category | Name | Display Date | Timeline Year | Era | Description
+
+        <br><br>
+
+        One historical entry per line.
+
+        <br><br>
+
+        Categories that do not already exist will be created automatically.
+
+      </div>
+
+
+      <textarea
+        id="bulkImportText"
+        class="importTextArea"
+        placeholder="Events | Vietnam War | 1955–1975 | 1955 | CE | Description here..."
+      ></textarea>
+
+
+      <button
+        class="secondaryButton"
+        id="previewImportButton"
+        style="margin-top:12px;"
+      >
+        Preview Import
+      </button>
+
+
+      <div
+        id="bulkImportPreview"
+        class="importPreview"
+      ></div>
+
+
+      <button
+        class="primaryButton"
+        id="confirmImportButton"
+        style="display:none;margin-top:15px;"
+      >
+        Import Entries
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     SETTINGS
+===================================================== -->
+
+<div
+  class="modalOverlay"
+  id="settingsOverlay"
+>
 
   <div class="modal">
 
@@ -984,7 +1556,9 @@ main {
 
     </div>
 
+
     <div class="modalContent">
+
 
       <button
         class="primaryButton"
@@ -994,11 +1568,21 @@ main {
       </button>
 
 
+      <button
+        class="secondaryButton"
+        id="bulkImportSettingsButton"
+        style="margin-top:10px;"
+      >
+        Bulk Import Entries
+      </button>
+
+
       <div class="settingsSection">
 
         <div class="settingsHeading">
           Database Backup
         </div>
+
 
         <button
           class="secondaryButton"
@@ -1006,6 +1590,7 @@ main {
         >
           Export Backup
         </button>
+
 
         <label class="fileButton">
 
@@ -1040,9 +1625,15 @@ main {
 </div>
 
 
-<!-- CATEGORY MANAGER -->
 
-<div class="modalOverlay" id="categoryOverlay">
+<!-- =====================================================
+     CATEGORIES
+===================================================== -->
+
+<div
+  class="modalOverlay"
+  id="categoryOverlay"
+>
 
   <div class="modal">
 
@@ -1063,6 +1654,7 @@ main {
 
     </div>
 
+
     <div class="modalContent">
 
       <div class="field">
@@ -1074,10 +1666,11 @@ main {
         <input
           id="newCategoryInput"
           type="text"
-          placeholder="e.g. Places"
+          placeholder="e.g. Documents"
         >
 
       </div>
+
 
       <button
         class="primaryButton"
@@ -1104,332 +1697,435 @@ main {
 </div>
 
 
+
 <script>
 
-/* ==========================================================
-   DATABASE
-========================================================== */
+/* =========================================================
+   DATABASE VARIABLES
+========================================================= */
 
-const DB_NAME = "HistoryTimelineDB";
-const DB_VERSION = 2;
+const DB_NAME =
+  "HistoryTimelineDB";
 
-const ENTRY_STORE = "entries";
-const CATEGORY_STORE = "categories";
+const DB_VERSION =
+  3;
+
+const ENTRY_STORE =
+  "entries";
+
+const CATEGORY_STORE =
+  "categories";
+
 
 let db;
 
 let entries = [];
+
 let categories = [];
 
-let currentView = "timeline";
+let currentView =
+  "timeline";
 
 let editingPhotos = [];
 
+let pendingBulkEntries =
+  [];
 
-/* ==========================================================
+
+/* =========================================================
    OPEN DATABASE
-========================================================== */
+========================================================= */
 
 function openDatabase() {
 
-  return new Promise((resolve, reject) => {
+  return new Promise(
+    (resolve,reject) => {
 
-    const request =
-      indexedDB.open(DB_NAME, DB_VERSION);
-
-    request.onupgradeneeded = event => {
-
-      const database =
-        event.target.result;
-
-      if (
-        !database.objectStoreNames.contains(
-          ENTRY_STORE
-        )
-      ) {
-
-        database.createObjectStore(
-          ENTRY_STORE,
-          {
-            keyPath: "id",
-            autoIncrement: true
-          }
+      const request =
+        indexedDB.open(
+          DB_NAME,
+          DB_VERSION
         );
 
-      }
 
-      if (
-        !database.objectStoreNames.contains(
-          CATEGORY_STORE
-        )
-      ) {
+      request.onupgradeneeded =
+        event => {
 
-        database.createObjectStore(
-          CATEGORY_STORE,
-          {
-            keyPath: "id",
-            autoIncrement: true
+          const database =
+            event.target.result;
+
+
+          if (
+            !database
+              .objectStoreNames
+              .contains(
+                ENTRY_STORE
+              )
+          ) {
+
+            database
+              .createObjectStore(
+                ENTRY_STORE,
+                {
+                  keyPath: "id",
+                  autoIncrement: true
+                }
+              );
+
           }
-        );
 
-      }
 
-    };
+          if (
+            !database
+              .objectStoreNames
+              .contains(
+                CATEGORY_STORE
+              )
+          ) {
 
-    request.onsuccess = event => {
+            database
+              .createObjectStore(
+                CATEGORY_STORE,
+                {
+                  keyPath: "id",
+                  autoIncrement: true
+                }
+              );
 
-      db =
-        event.target.result;
+          }
 
-      resolve();
+        };
 
-    };
 
-    request.onerror = () =>
-      reject(request.error);
+      request.onsuccess =
+        event => {
 
-  });
+          db =
+            event.target.result;
+
+          resolve();
+
+        };
+
+
+      request.onerror =
+        () =>
+          reject(
+            request.error
+          );
+
+    }
+  );
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    LOAD ENTRIES
-========================================================== */
+========================================================= */
 
 function loadEntries() {
 
-  return new Promise((resolve, reject) => {
+  return new Promise(
+    (resolve,reject) => {
 
-    const transaction =
-      db.transaction(
-        ENTRY_STORE,
-        "readonly"
-      );
+      const transaction =
+        db.transaction(
+          ENTRY_STORE,
+          "readonly"
+        );
 
-    const store =
-      transaction.objectStore(
-        ENTRY_STORE
-      );
 
-    const request =
-      store.getAll();
+      const request =
+        transaction
+          .objectStore(
+            ENTRY_STORE
+          )
+          .getAll();
 
-    request.onsuccess = () => {
 
-      entries =
-        request.result || [];
+      request.onsuccess =
+        () => {
 
-      resolve();
+          entries =
+            request.result || [];
 
-    };
+          resolve();
 
-    request.onerror = () =>
-      reject(request.error);
+        };
 
-  });
+
+      request.onerror =
+        () =>
+          reject(
+            request.error
+          );
+
+    }
+  );
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    LOAD CATEGORIES
-========================================================== */
+========================================================= */
 
 function loadCategories() {
 
-  return new Promise((resolve, reject) => {
+  return new Promise(
+    (resolve,reject) => {
 
-    const transaction =
-      db.transaction(
-        CATEGORY_STORE,
-        "readonly"
-      );
+      const transaction =
+        db.transaction(
+          CATEGORY_STORE,
+          "readonly"
+        );
 
-    const store =
-      transaction.objectStore(
-        CATEGORY_STORE
-      );
 
-    const request =
-      store.getAll();
+      const request =
+        transaction
+          .objectStore(
+            CATEGORY_STORE
+          )
+          .getAll();
 
-    request.onsuccess = () => {
 
-      categories =
-        request.result || [];
+      request.onsuccess =
+        () => {
 
-      resolve();
+          categories =
+            request.result || [];
 
-    };
+          resolve();
 
-    request.onerror = () =>
-      reject(request.error);
+        };
 
-  });
+
+      request.onerror =
+        () =>
+          reject(
+            request.error
+          );
+
+    }
+  );
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    SAVE ENTRY
-========================================================== */
+========================================================= */
 
 function saveEntry(entry) {
 
-  return new Promise((resolve, reject) => {
+  return new Promise(
+    (resolve,reject) => {
 
-    const transaction =
-      db.transaction(
-        ENTRY_STORE,
-        "readwrite"
-      );
+      const transaction =
+        db.transaction(
+          ENTRY_STORE,
+          "readwrite"
+        );
 
-    const store =
-      transaction.objectStore(
-        ENTRY_STORE
-      );
 
-    let request;
+      const store =
+        transaction.objectStore(
+          ENTRY_STORE
+        );
 
-    if (entry.id) {
 
-      request =
-        store.put(entry);
+      let request;
 
-    } else {
 
-      delete entry.id;
+      if (entry.id) {
 
-      request =
-        store.add(entry);
+        request =
+          store.put(entry);
+
+      }
+
+      else {
+
+        delete entry.id;
+
+        request =
+          store.add(entry);
+
+      }
+
+
+      request.onsuccess =
+        () =>
+          resolve(
+            request.result
+          );
+
+
+      request.onerror =
+        () =>
+          reject(
+            request.error
+          );
 
     }
-
-    request.onsuccess = () =>
-      resolve(request.result);
-
-    request.onerror = () =>
-      reject(request.error);
-
-  });
+  );
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    SAVE CATEGORY
-========================================================== */
+========================================================= */
 
 function saveCategory(category) {
 
-  return new Promise((resolve, reject) => {
+  return new Promise(
+    (resolve,reject) => {
 
-    const transaction =
-      db.transaction(
-        CATEGORY_STORE,
-        "readwrite"
-      );
+      const transaction =
+        db.transaction(
+          CATEGORY_STORE,
+          "readwrite"
+        );
 
-    const store =
-      transaction.objectStore(
-        CATEGORY_STORE
-      );
 
-    let request;
+      const store =
+        transaction.objectStore(
+          CATEGORY_STORE
+        );
 
-    if (category.id) {
 
-      request =
-        store.put(category);
+      let request;
 
-    } else {
 
-      delete category.id;
+      if (category.id) {
 
-      request =
-        store.add(category);
+        request =
+          store.put(category);
+
+      }
+
+      else {
+
+        delete category.id;
+
+        request =
+          store.add(category);
+
+      }
+
+
+      request.onsuccess =
+        () =>
+          resolve(
+            request.result
+          );
+
+
+      request.onerror =
+        () =>
+          reject(
+            request.error
+          );
 
     }
-
-    request.onsuccess = () =>
-      resolve(request.result);
-
-    request.onerror = () =>
-      reject(request.error);
-
-  });
+  );
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    DELETE ENTRY
-========================================================== */
+========================================================= */
 
 function deleteEntry(id) {
 
-  return new Promise((resolve, reject) => {
+  return new Promise(
+    (resolve,reject) => {
 
-    const transaction =
-      db.transaction(
-        ENTRY_STORE,
-        "readwrite"
-      );
+      const transaction =
+        db.transaction(
+          ENTRY_STORE,
+          "readwrite"
+        );
 
-    const request =
-      transaction
-        .objectStore(ENTRY_STORE)
-        .delete(id);
 
-    request.onsuccess = resolve;
+      const request =
+        transaction
+          .objectStore(
+            ENTRY_STORE
+          )
+          .delete(id);
 
-    request.onerror = () =>
-      reject(request.error);
 
-  });
+      request.onsuccess =
+        resolve;
+
+
+      request.onerror =
+        () =>
+          reject(
+            request.error
+          );
+
+    }
+  );
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    DELETE CATEGORY
-========================================================== */
+========================================================= */
 
 function deleteCategory(id) {
 
-  return new Promise((resolve, reject) => {
+  return new Promise(
+    (resolve,reject) => {
 
-    const transaction =
-      db.transaction(
-        CATEGORY_STORE,
-        "readwrite"
-      );
+      const transaction =
+        db.transaction(
+          CATEGORY_STORE,
+          "readwrite"
+        );
 
-    const request =
-      transaction
-        .objectStore(CATEGORY_STORE)
-        .delete(id);
 
-    request.onsuccess = resolve;
+      const request =
+        transaction
+          .objectStore(
+            CATEGORY_STORE
+          )
+          .delete(id);
 
-    request.onerror = () =>
-      reject(request.error);
 
-  });
+      request.onsuccess =
+        resolve;
+
+
+      request.onerror =
+        () =>
+          reject(
+            request.error
+          );
+
+    }
+  );
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    DEFAULT CATEGORIES
-========================================================== */
+========================================================= */
 
 async function createDefaultCategories() {
 
   if (categories.length) {
     return;
   }
+
 
   const defaults = [
     "Events",
@@ -1439,7 +2135,10 @@ async function createDefaultCategories() {
     "Objects"
   ];
 
-  for (const name of defaults) {
+
+  for (
+    const name of defaults
+  ) {
 
     await saveCategory({
       name
@@ -1447,58 +2146,93 @@ async function createDefaultCategories() {
 
   }
 
+
   await loadCategories();
 
 }
 
 
-/* ==========================================================
-   ESCAPE HTML
-========================================================== */
+/* =========================================================
+   HTML ESCAPE
+========================================================= */
 
-function escapeHTML(value = "") {
+function escapeHTML(
+  value = ""
+) {
 
   return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
 
 }
 
 
-/* ==========================================================
-   TIMELINE SORT
-========================================================== */
+/* =========================================================
+   CHRONOLOGY
+========================================================= */
 
-function chronologicalValue(entry) {
+function chronologicalValue(
+  entry
+) {
 
   const year =
-    Number(entry.sortYear) || 0;
+    Number(
+      entry.sortYear
+    ) || 0;
 
-  if (entry.era === "BCE") {
+
+  if (
+    entry.era === "BCE"
+  ) {
 
     return -year;
 
   }
+
 
   return year;
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    CATEGORY NAME
-========================================================== */
+========================================================= */
 
-function getCategoryName(categoryId) {
+function getCategoryName(
+  categoryId
+) {
 
   const category =
     categories.find(
       category =>
-        category.id === categoryId
+        Number(category.id) ===
+        Number(categoryId)
     );
+
 
   return category
     ? category.name
@@ -1507,76 +2241,174 @@ function getCategoryName(categoryId) {
 }
 
 
-/* ==========================================================
-   SEARCH
-========================================================== */
+/* =========================================================
+   CATEGORY LOOKUP BY NAME
+========================================================= */
+
+function findCategoryByName(
+  name
+) {
+
+  return categories.find(
+    category =>
+      category.name
+        .trim()
+        .toLowerCase() ===
+      name
+        .trim()
+        .toLowerCase()
+  );
+
+}
+
+
+/* =========================================================
+   GET OR CREATE CATEGORY
+========================================================= */
+
+async function getOrCreateCategory(
+  name
+) {
+
+  let category =
+    findCategoryByName(name);
+
+
+  if (category) {
+
+    return category;
+
+  }
+
+
+  const id =
+    await saveCategory({
+      name: name.trim()
+    });
+
+
+  await loadCategories();
+
+
+  category =
+    categories.find(
+      category =>
+        category.id === id
+    );
+
+
+  return category;
+
+}
+
+
+/* =========================================================
+   SEARCH / FILTER
+========================================================= */
 
 function getFilteredEntries() {
 
   const search =
     document
-      .getElementById("searchInput")
+      .getElementById(
+        "searchInput"
+      )
       .value
       .trim()
       .toLowerCase();
 
+
   let list =
     [...entries];
 
+
   if (
-    currentView !== "timeline" &&
-    currentView !== "all"
+    currentView !==
+      "timeline" &&
+    currentView !==
+      "all"
   ) {
 
     list =
       list.filter(
         entry =>
-          String(entry.categoryId) ===
-          String(currentView)
+          String(
+            entry.categoryId
+          ) ===
+          String(
+            currentView
+          )
       );
 
   }
 
+
   if (search) {
 
     list =
-      list.filter(entry => {
+      list.filter(
+        entry => {
 
-        const category =
-          getCategoryName(
-            entry.categoryId
+          const category =
+            getCategoryName(
+              entry.categoryId
+            );
+
+
+          return (
+
+            entry.name
+              .toLowerCase()
+              .includes(
+                search
+              )
+
+            ||
+
+            (
+              entry.description ||
+              ""
+            )
+              .toLowerCase()
+              .includes(
+                search
+              )
+
+            ||
+
+            (
+              entry.dateLabel ||
+              ""
+            )
+              .toLowerCase()
+              .includes(
+                search
+              )
+
+            ||
+
+            category
+              .toLowerCase()
+              .includes(
+                search
+              )
+
           );
 
-        return (
-          entry.name
-            .toLowerCase()
-            .includes(search) ||
-
-          (entry.description || "")
-            .toLowerCase()
-            .includes(search) ||
-
-          (entry.dateLabel || "")
-            .toLowerCase()
-            .includes(search) ||
-
-          category
-            .toLowerCase()
-            .includes(search)
-        );
-
-      });
+        }
+      );
 
   }
+
 
   return list;
 
 }
 
 
-/* ==========================================================
-   TABS
-========================================================== */
+/* =========================================================
+   RENDER TABS
+========================================================= */
 
 function renderTabs() {
 
@@ -1585,11 +2417,13 @@ function renderTabs() {
       "tabsContainer"
     );
 
+
   let html = `
 
     <button
       class="tab ${
-        currentView === "timeline"
+        currentView ===
+        "timeline"
           ? "active"
           : ""
       }"
@@ -1598,9 +2432,11 @@ function renderTabs() {
       Timeline
     </button>
 
+
     <button
       class="tab ${
-        currentView === "all"
+        currentView ===
+        "all"
           ? "active"
           : ""
       }"
@@ -1611,59 +2447,80 @@ function renderTabs() {
 
   `;
 
-  categories
+
+  [...categories]
+
     .sort(
       (a,b) =>
-        a.name.localeCompare(b.name)
+        a.name.localeCompare(
+          b.name
+        )
     )
-    .forEach(category => {
 
-      html += `
+    .forEach(
+      category => {
 
-        <button
-          class="tab ${
-            String(currentView) ===
-            String(category.id)
-              ? "active"
-              : ""
-          }"
-          data-view="${category.id}"
-        >
-          ${escapeHTML(category.name)}
-        </button>
+        html += `
 
-      `;
+          <button
+            class="tab ${
+              String(
+                currentView
+              ) ===
+              String(
+                category.id
+              )
+                ? "active"
+                : ""
+            }"
+            data-view="${category.id}"
+          >
+            ${escapeHTML(
+              category.name
+            )}
+          </button>
 
-    });
+        `;
 
-  container.innerHTML = html;
+      }
+    );
+
+
+  container.innerHTML =
+    html;
+
 
   container
-    .querySelectorAll(".tab")
-    .forEach(tab => {
+    .querySelectorAll(
+      ".tab"
+    )
+    .forEach(
+      tab => {
 
-      tab.addEventListener(
-        "click",
-        () => {
+        tab.addEventListener(
+          "click",
+          () => {
 
-          currentView =
-            tab.dataset.view;
+            currentView =
+              tab.dataset.view;
 
-          renderTabs();
 
-          render();
+            renderTabs();
 
-        }
-      );
+            render();
 
-    });
+          }
+        );
+
+      }
+    );
 
 }
 
 
-/* ==========================================================
-   RENDER
-========================================================== */
+/* =========================================================
+   MAIN RENDER
+========================================================= */
 
 function render() {
 
@@ -1672,17 +2529,24 @@ function render() {
       "mainContent"
     );
 
+
   const list =
     getFilteredEntries();
 
-  if (currentView === "timeline") {
+
+  if (
+    currentView ===
+    "timeline"
+  ) {
 
     renderTimeline(
       container,
       list
     );
 
-  } else {
+  }
+
+  else {
 
     renderList(
       container,
@@ -1694,17 +2558,35 @@ function render() {
 }
 
 
-/* ==========================================================
+/* =========================================================
    TIMELINE
-========================================================== */
+========================================================= */
 
-function renderTimeline(container, list) {
+function renderTimeline(
+  container,
+  list
+) {
 
   list.sort(
-    (a,b) =>
-      chronologicalValue(a) -
-      chronologicalValue(b)
+    (a,b) => {
+
+      const difference =
+        chronologicalValue(a) -
+        chronologicalValue(b);
+
+
+      if (difference !== 0) {
+        return difference;
+      }
+
+
+      return a.name.localeCompare(
+        b.name
+      );
+
+    }
   );
+
 
   if (!list.length) {
 
@@ -1716,7 +2598,7 @@ function renderTimeline(container, list) {
           Your timeline is empty
         </div>
 
-        Tap + to add your first historical entry.
+        Add entries manually or use Bulk Import.
 
       </div>
 
@@ -1726,91 +2608,127 @@ function renderTimeline(container, list) {
 
   }
 
+
   let html =
     `<div class="timeline">`;
 
-  list.forEach(entry => {
 
-    const category =
-      getCategoryName(
-        entry.categoryId
-      );
+  list.forEach(
+    entry => {
 
-    const photoCount =
-      entry.photos?.length || 0;
+      const category =
+        getCategoryName(
+          entry.categoryId
+        );
 
-    html += `
 
-      <div class="timelineItem">
+      const photoCount =
+        entry.photos?.length ||
+        0;
 
-        <div class="timelineDot"></div>
 
-        <div class="itemCard">
+      html += `
 
-          <button
-            class="itemCardButton"
-            onclick="showDetails(${entry.id})"
-          >
+        <div class="timelineItem">
 
-            <div class="cardTop">
+          <div class="timelineDot"></div>
 
-              <div>
 
-                <div class="typeBadge">
-                  ${escapeHTML(category)}
+          <div class="itemCard">
+
+            <button
+              class="itemCardButton"
+              onclick="showDetails(${entry.id})"
+            >
+
+              <div class="cardTop">
+
+                <div>
+
+                  <div class="typeBadge">
+                    ${escapeHTML(
+                      category
+                    )}
+                  </div>
+
+
+                  <div class="cardTitle">
+                    ${escapeHTML(
+                      entry.name
+                    )}
+                  </div>
+
+
+                  <div class="cardDate">
+                    ${escapeHTML(
+                      entry.dateLabel ||
+                      ""
+                    )}
+                  </div>
+
                 </div>
 
-                <div class="cardTitle">
-                  ${escapeHTML(entry.name)}
-                </div>
 
-                <div class="cardDate">
-                  ${escapeHTML(
-                    entry.dateLabel || ""
-                  )}
-                </div>
+                ${
+                  photoCount
 
-              </div>
+                  ? `
 
-              ${
-                photoCount
-                ? `
                     <div class="photoIndicator">
                       📷 ${photoCount}
                     </div>
+
                   `
+
+                  : ""
+                }
+
+              </div>
+
+
+              ${
+                entry.description
+
+                ? `
+
+                  <div class="previewText">
+
+                    ${escapeHTML(
+                      entry.description.length >
+                      150
+
+                      ? entry.description
+                          .substring(
+                            0,
+                            150
+                          ) +
+                        "…"
+
+                      : entry.description
+                    )}
+
+                  </div>
+
+                `
+
                 : ""
               }
 
-            </div>
+            </button>
 
-            ${
-              entry.description
-              ? `
-                <div class="previewText">
-
-                  ${escapeHTML(
-                    entry.description.length > 150
-                    ? entry.description.substring(0,150) + "…"
-                    : entry.description
-                  )}
-
-                </div>
-              `
-              : ""
-            }
-
-          </button>
+          </div>
 
         </div>
 
-      </div>
+      `;
 
-    `;
+    }
+  );
 
-  });
 
-  html += `</div>`;
+  html +=
+    `</div>`;
+
 
   container.innerHTML =
     html;
@@ -1818,19 +2736,26 @@ function renderTimeline(container, list) {
 }
 
 
-/* ==========================================================
-   LIST VIEW
-========================================================== */
+/* =========================================================
+   CATEGORY / ALL LIST
+========================================================= */
 
-function renderList(container, list) {
+function renderList(
+  container,
+  list
+) {
 
   list.sort(
     (a,b) =>
-      a.name.localeCompare(b.name)
+      a.name.localeCompare(
+        b.name
+      )
   );
+
 
   let heading =
     "All Entries";
+
 
   if (
     currentView !== "all"
@@ -1843,6 +2768,7 @@ function renderList(container, list) {
           String(currentView)
       );
 
+
     if (category) {
 
       heading =
@@ -1852,13 +2778,17 @@ function renderList(container, list) {
 
   }
 
+
   let html = `
 
     <div class="sectionHeading">
-      ${escapeHTML(heading)}
+      ${escapeHTML(
+        heading
+      )}
     </div>
 
   `;
+
 
   if (!list.length) {
 
@@ -1870,7 +2800,7 @@ function renderList(container, list) {
           No entries
         </div>
 
-        Tap + to add one.
+        Tap + or use Bulk Import.
 
       </div>
 
@@ -1878,46 +2808,55 @@ function renderList(container, list) {
 
   }
 
-  list.forEach(entry => {
 
-    html += `
+  list.forEach(
+    entry => {
 
-      <div class="listCard">
+      html += `
 
-        <button
-          onclick="showDetails(${entry.id})"
-        >
+        <div class="listCard">
 
-          <div class="listTitle">
-            ${escapeHTML(entry.name)}
-          </div>
+          <button
+            onclick="showDetails(${entry.id})"
+          >
 
-          <div class="listMeta">
+            <div class="listTitle">
+              ${escapeHTML(
+                entry.name
+              )}
+            </div>
 
-            ${escapeHTML(
-              getCategoryName(
-                entry.categoryId
-              )
-            )}
 
-            ${
-              entry.dateLabel
-              ? " • " +
-                escapeHTML(
-                  entry.dateLabel
+            <div class="listMeta">
+
+              ${escapeHTML(
+                getCategoryName(
+                  entry.categoryId
                 )
-              : ""
-            }
+              )}
 
-          </div>
+              ${
+                entry.dateLabel
 
-        </button>
+                ? " • " +
+                  escapeHTML(
+                    entry.dateLabel
+                  )
 
-      </div>
+                : ""
+              }
 
-    `;
+            </div>
 
-  });
+          </button>
+
+        </div>
+
+      `;
+
+    }
+  );
+
 
   container.innerHTML =
     html;
@@ -1925,9 +2864,9 @@ function renderList(container, list) {
 }
 
 
-/* ==========================================================
+/* =========================================================
    DETAILS
-========================================================== */
+========================================================= */
 
 function showDetails(id) {
 
@@ -1937,16 +2876,21 @@ function showDetails(id) {
         entry.id === id
     );
 
+
   if (!entry) {
     return;
   }
+
 
   const category =
     getCategoryName(
       entry.categoryId
     );
 
-  let galleryHTML = "";
+
+  let galleryHTML =
+    "";
+
 
   if (
     entry.photos &&
@@ -1963,6 +2907,7 @@ function showDetails(id) {
         >
 
     `;
+
 
     entry.photos.forEach(
       (photo,index) => {
@@ -1983,6 +2928,7 @@ function showDetails(id) {
       }
     );
 
+
     galleryHTML += `
 
         </div>
@@ -2000,6 +2946,7 @@ function showDetails(id) {
 
   }
 
+
   document.getElementById(
     "detailContent"
   ).innerHTML = `
@@ -2007,18 +2954,26 @@ function showDetails(id) {
     <div class="detailTop">
 
       <div class="detailType">
-        ${escapeHTML(category)}
+        ${escapeHTML(
+          category
+        )}
       </div>
 
+
       <div class="detailTitle">
-        ${escapeHTML(entry.name)}
+        ${escapeHTML(
+          entry.name
+        )}
       </div>
+
 
       <div class="detailDate">
         ${escapeHTML(
-          entry.dateLabel || ""
+          entry.dateLabel ||
+          ""
         )}
       </div>
+
 
       <button
         class="editMiniButton"
@@ -2029,11 +2984,14 @@ function showDetails(id) {
 
     </div>
 
+
     ${galleryHTML}
+
 
     <div class="descriptionHeading">
       Significance
     </div>
+
 
     <div class="detailDescription">
       ${escapeHTML(
@@ -2044,14 +3002,17 @@ function showDetails(id) {
 
   `;
 
+
   openModal(
     "detailOverlay"
   );
+
 
   const gallery =
     document.getElementById(
       "galleryTrack"
     );
+
 
   if (gallery) {
 
@@ -2064,6 +3025,7 @@ function showDetails(id) {
             gallery.scrollLeft /
             gallery.clientWidth
           );
+
 
         document.getElementById(
           "galleryCount"
@@ -2078,9 +3040,9 @@ function showDetails(id) {
 }
 
 
-/* ==========================================================
+/* =========================================================
    CATEGORY DROPDOWN
-========================================================== */
+========================================================= */
 
 function populateCategoryDropdown() {
 
@@ -2089,59 +3051,80 @@ function populateCategoryDropdown() {
       "entryCategory"
     );
 
-  select.innerHTML = "";
 
-  categories
+  select.innerHTML =
+    "";
+
+
+  [...categories]
+
     .sort(
       (a,b) =>
-        a.name.localeCompare(b.name)
+        a.name.localeCompare(
+          b.name
+        )
     )
-    .forEach(category => {
 
-      const option =
-        document.createElement(
-          "option"
+    .forEach(
+      category => {
+
+        const option =
+          document.createElement(
+            "option"
+          );
+
+
+        option.value =
+          category.id;
+
+
+        option.textContent =
+          category.name;
+
+
+        select.appendChild(
+          option
         );
 
-      option.value =
-        category.id;
-
-      option.textContent =
-        category.name;
-
-      select.appendChild(
-        option
-      );
-
-    });
+      }
+    );
 
 }
 
 
-/* ==========================================================
-   EDIT ENTRY
-========================================================== */
+/* =========================================================
+   ENTRY EDITOR
+========================================================= */
 
-function openEditor(id = null) {
+function openEditor(
+  id = null
+) {
 
   closeModal(
     "detailOverlay"
   );
 
+
   populateCategoryDropdown();
+
 
   const form =
     document.getElementById(
       "entryForm"
     );
 
+
   form.reset();
 
-  editingPhotos = [];
+
+  editingPhotos =
+    [];
+
 
   document.getElementById(
     "entryId"
   ).value = "";
+
 
   document.getElementById(
     "editorTitle"
@@ -2150,12 +3133,14 @@ function openEditor(id = null) {
       ? "Edit Entry"
       : "Add Entry";
 
+
   document.getElementById(
     "deleteEntryButton"
   ).style.display =
     id
       ? "block"
       : "none";
+
 
   if (id) {
 
@@ -2165,51 +3150,70 @@ function openEditor(id = null) {
           entry.id === id
       );
 
+
     if (!entry) {
       return;
     }
+
 
     document.getElementById(
       "entryId"
     ).value =
       entry.id;
 
+
     document.getElementById(
       "entryCategory"
     ).value =
       entry.categoryId;
+
 
     document.getElementById(
       "entryName"
     ).value =
       entry.name;
 
+
     document.getElementById(
       "dateLabel"
     ).value =
-      entry.dateLabel || "";
+      entry.dateLabel ||
+      "";
+
 
     document.getElementById(
       "sortYear"
     ).value =
       entry.sortYear;
 
+
     document.getElementById(
       "era"
     ).value =
-      entry.era || "CE";
+      entry.era ||
+      "CE";
+
 
     document.getElementById(
       "description"
     ).value =
-      entry.description || "";
+      entry.description ||
+      "";
+
 
     editingPhotos =
-      [...(entry.photos || [])];
+      [
+        ...(
+          entry.photos ||
+          []
+        )
+      ];
 
   }
 
+
   renderPhotoPreviews();
+
 
   openModal(
     "editorOverlay"
@@ -2218,9 +3222,9 @@ function openEditor(id = null) {
 }
 
 
-/* ==========================================================
+/* =========================================================
    PHOTOS
-========================================================== */
+========================================================= */
 
 document.getElementById(
   "photoInput"
@@ -2233,10 +3237,16 @@ document.getElementById(
         event.target.files
       );
 
-    for (const file of files) {
+
+    for (
+      const file of files
+    ) {
 
       const image =
-        await resizeImage(file);
+        await resizeImage(
+          file
+        );
+
 
       editingPhotos.push(
         image
@@ -2244,17 +3254,20 @@ document.getElementById(
 
     }
 
+
     renderPhotoPreviews();
 
-    event.target.value = "";
+
+    event.target.value =
+      "";
 
   }
 );
 
 
-/* ==========================================================
-   RESIZE PHOTO
-========================================================== */
+/* =========================================================
+   IMAGE RESIZE
+========================================================= */
 
 function resizeImage(file) {
 
@@ -2264,90 +3277,113 @@ function resizeImage(file) {
       const reader =
         new FileReader();
 
+
       reader.onload =
         event => {
 
           const image =
             new Image();
 
-          image.onload = () => {
 
-            const MAX = 1800;
+          image.onload =
+            () => {
 
-            let width =
-              image.width;
+              const MAX =
+                1800;
 
-            let height =
-              image.height;
 
-            if (
-              width > height &&
-              width > MAX
-            ) {
+              let width =
+                image.width;
 
-              height *=
-                MAX / width;
 
-              width =
-                MAX;
+              let height =
+                image.height;
 
-            }
 
-            else if (
-              height > MAX
-            ) {
+              if (
+                width > height &&
+                width > MAX
+              ) {
 
-              width *=
-                MAX / height;
+                height *=
+                  MAX / width;
 
-              height =
-                MAX;
 
-            }
+                width =
+                  MAX;
 
-            const canvas =
-              document.createElement(
-                "canvas"
+              }
+
+              else if (
+                height > MAX
+              ) {
+
+                width *=
+                  MAX / height;
+
+
+                height =
+                  MAX;
+
+              }
+
+
+              const canvas =
+                document.createElement(
+                  "canvas"
+                );
+
+
+              canvas.width =
+                Math.round(
+                  width
+                );
+
+
+              canvas.height =
+                Math.round(
+                  height
+                );
+
+
+              const context =
+                canvas.getContext(
+                  "2d"
+                );
+
+
+              context.drawImage(
+                image,
+                0,
+                0,
+                canvas.width,
+                canvas.height
               );
 
-            canvas.width =
-              Math.round(width);
 
-            canvas.height =
-              Math.round(height);
-
-            const context =
-              canvas.getContext(
-                "2d"
+              resolve(
+                canvas.toDataURL(
+                  "image/jpeg",
+                  .84
+                )
               );
 
-            context.drawImage(
-              image,
-              0,
-              0,
-              canvas.width,
-              canvas.height
-            );
+            };
 
-            resolve(
-              canvas.toDataURL(
-                "image/jpeg",
-                .84
-              )
-            );
-
-          };
 
           image.onerror =
             reject;
+
 
           image.src =
             event.target.result;
 
         };
 
+
       reader.onerror =
         reject;
+
 
       reader.readAsDataURL(
         file
@@ -2359,9 +3395,9 @@ function resizeImage(file) {
 }
 
 
-/* ==========================================================
-   PHOTO PREVIEWS
-========================================================== */
+/* =========================================================
+   PHOTO PREVIEW
+========================================================= */
 
 function renderPhotoPreviews() {
 
@@ -2370,8 +3406,10 @@ function renderPhotoPreviews() {
       "photoPreviewGrid"
     );
 
+
   grid.innerHTML =
     editingPhotos
+
       .map(
         (photo,index) => `
 
@@ -2391,26 +3429,30 @@ function renderPhotoPreviews() {
 
         `
       )
+
       .join("");
 
 }
 
 
-function removeEditingPhoto(index) {
+function removeEditingPhoto(
+  index
+) {
 
   editingPhotos.splice(
     index,
     1
   );
 
+
   renderPhotoPreviews();
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    SAVE ENTRY FORM
-========================================================== */
+========================================================= */
 
 document.getElementById(
   "entryForm"
@@ -2420,20 +3462,12 @@ document.getElementById(
 
     event.preventDefault();
 
-    if (!categories.length) {
-
-      alert(
-        "Create at least one category first."
-      );
-
-      return;
-
-    }
 
     const id =
       document.getElementById(
         "entryId"
       ).value;
+
 
     const entry = {
 
@@ -2447,12 +3481,16 @@ document.getElementById(
       name:
         document.getElementById(
           "entryName"
-        ).value.trim(),
+        )
+        .value
+        .trim(),
 
       dateLabel:
         document.getElementById(
           "dateLabel"
-        ).value.trim(),
+        )
+        .value
+        .trim(),
 
       sortYear:
         Number(
@@ -2469,7 +3507,9 @@ document.getElementById(
       description:
         document.getElementById(
           "description"
-        ).value.trim(),
+        )
+        .value
+        .trim(),
 
       photos:
         editingPhotos,
@@ -2479,6 +3519,7 @@ document.getElementById(
 
     };
 
+
     if (id) {
 
       entry.id =
@@ -2486,13 +3527,19 @@ document.getElementById(
 
     }
 
-    await saveEntry(entry);
+
+    await saveEntry(
+      entry
+    );
+
 
     await loadEntries();
+
 
     closeModal(
       "editorOverlay"
     );
+
 
     render();
 
@@ -2500,9 +3547,9 @@ document.getElementById(
 );
 
 
-/* ==========================================================
+/* =========================================================
    DELETE ENTRY
-========================================================== */
+========================================================= */
 
 document.getElementById(
   "deleteEntryButton"
@@ -2517,26 +3564,33 @@ document.getElementById(
         ).value
       );
 
+
     if (!id) {
       return;
     }
 
-    const confirmed =
-      confirm(
-        "Delete this historical entry?"
-      );
 
-    if (!confirmed) {
+    if (
+      !confirm(
+        "Delete this historical entry?"
+      )
+    ) {
       return;
     }
 
-    await deleteEntry(id);
+
+    await deleteEntry(
+      id
+    );
+
 
     await loadEntries();
+
 
     closeModal(
       "editorOverlay"
     );
+
 
     render();
 
@@ -2544,9 +3598,9 @@ document.getElementById(
 );
 
 
-/* ==========================================================
-   CATEGORY MANAGER
-========================================================== */
+/* =========================================================
+   CATEGORY LIST
+========================================================= */
 
 function renderCategoryList() {
 
@@ -2555,57 +3609,69 @@ function renderCategoryList() {
       "categoryList"
     );
 
+
   if (!categories.length) {
 
-    container.innerHTML = `
-      <div style="color:var(--gray);">
+    container.innerHTML =
+      `<div style="color:var(--gray);">
         No categories yet.
-      </div>
-    `;
+      </div>`;
 
     return;
 
   }
 
+
   container.innerHTML =
-    categories
+    [...categories]
+
       .sort(
         (a,b) =>
-          a.name.localeCompare(b.name)
+          a.name.localeCompare(
+            b.name
+          )
       )
-      .map(category => `
 
-        <div class="categoryRow">
+      .map(
+        category => `
 
-          <div class="categoryName">
-            ${escapeHTML(category.name)}
+          <div class="categoryRow">
+
+            <div class="categoryName">
+              ${escapeHTML(
+                category.name
+              )}
+            </div>
+
+
+            <button
+              class="smallAction"
+              onclick="renameCategory(${category.id})"
+            >
+              Rename
+            </button>
+
+
+            <button
+              class="smallAction smallDanger"
+              onclick="removeCategory(${category.id})"
+            >
+              Delete
+            </button>
+
           </div>
 
-          <button
-            class="smallAction"
-            onclick="renameCategory(${category.id})"
-          >
-            Rename
-          </button>
+        `
+      )
 
-          <button
-            class="smallAction smallDanger"
-            onclick="removeCategory(${category.id})"
-          >
-            Delete
-          </button>
-
-        </div>
-
-      `)
       .join("");
 
 }
 
 
-/* ==========================================================
+/* =========================================================
    ADD CATEGORY
-========================================================== */
+========================================================= */
 
 document.getElementById(
   "addCategoryButton"
@@ -2618,22 +3684,21 @@ document.getElementById(
         "newCategoryInput"
       );
 
+
     const name =
       input.value.trim();
+
 
     if (!name) {
       return;
     }
 
-    const duplicate =
-      categories.some(
-        category =>
-          category.name
-            .toLowerCase() ===
-          name.toLowerCase()
-      );
 
-    if (duplicate) {
+    if (
+      findCategoryByName(
+        name
+      )
+    ) {
 
       alert(
         "That category already exists."
@@ -2643,13 +3708,18 @@ document.getElementById(
 
     }
 
+
     await saveCategory({
       name
     });
 
-    input.value = "";
+
+    input.value =
+      "";
+
 
     await loadCategories();
+
 
     renderCategoryList();
 
@@ -2659,11 +3729,13 @@ document.getElementById(
 );
 
 
-/* ==========================================================
+/* =========================================================
    RENAME CATEGORY
-========================================================== */
+========================================================= */
 
-async function renameCategory(id) {
+async function renameCategory(
+  id
+) {
 
   const category =
     categories.find(
@@ -2671,9 +3743,11 @@ async function renameCategory(id) {
         category.id === id
     );
 
+
   if (!category) {
     return;
   }
+
 
   const name =
     prompt(
@@ -2681,18 +3755,23 @@ async function renameCategory(id) {
       category.name
     );
 
+
   if (!name) {
     return;
   }
 
+
   category.name =
     name.trim();
+
 
   await saveCategory(
     category
   );
 
+
   await loadCategories();
+
 
   renderCategoryList();
 
@@ -2703,11 +3782,13 @@ async function renameCategory(id) {
 }
 
 
-/* ==========================================================
+/* =========================================================
    REMOVE CATEGORY
-========================================================== */
+========================================================= */
 
-async function removeCategory(id) {
+async function removeCategory(
+  id
+) {
 
   const category =
     categories.find(
@@ -2715,20 +3796,26 @@ async function removeCategory(id) {
         category.id === id
     );
 
+
   if (!category) {
     return;
   }
 
+
   const used =
     entries.filter(
       entry =>
-        entry.categoryId === id
+        Number(
+          entry.categoryId
+        ) ===
+        Number(id)
     );
+
 
   if (used.length) {
 
     alert(
-      `"${category.name}" contains ${used.length} historical entries.
+      `"${category.name}" contains ${used.length} entries.
 
 Move or delete those entries before deleting the category.`
     );
@@ -2737,21 +3824,27 @@ Move or delete those entries before deleting the category.`
 
   }
 
-  const confirmed =
-    confirm(
-      `Delete category "${category.name}"?`
-    );
 
-  if (!confirmed) {
+  if (
+    !confirm(
+      `Delete category "${category.name}"?`
+    )
+  ) {
     return;
   }
 
-  await deleteCategory(id);
+
+  await deleteCategory(
+    id
+  );
+
 
   await loadCategories();
 
+
   currentView =
     "timeline";
+
 
   renderCategoryList();
 
@@ -2762,16 +3855,532 @@ Move or delete those entries before deleting the category.`
 }
 
 
-/* ==========================================================
+/* =========================================================
+   BULK IMPORT PARSER
+========================================================= */
+
+function parseBulkImport(
+  text
+) {
+
+  const lines =
+    text
+      .split(/\r?\n/)
+      .map(
+        line =>
+          line.trim()
+      )
+      .filter(Boolean);
+
+
+  const results =
+    [];
+
+
+  const errors =
+    [];
+
+
+  lines.forEach(
+    (line,index) => {
+
+      const lineNumber =
+        index + 1;
+
+
+      /*
+        Allow an optional heading row.
+      */
+
+      if (
+        line
+          .toLowerCase()
+          .startsWith(
+            "category |"
+          )
+      ) {
+
+        return;
+
+      }
+
+
+      const parts =
+        line
+          .split("|")
+          .map(
+            value =>
+              value.trim()
+          );
+
+
+      if (
+        parts.length < 6
+      ) {
+
+        errors.push(
+          `Line ${lineNumber}: Expected 6 fields separated by |`
+        );
+
+        return;
+
+      }
+
+
+      const category =
+        parts[0];
+
+
+      const name =
+        parts[1];
+
+
+      const dateLabel =
+        parts[2];
+
+
+      const sortYear =
+        Number(
+          parts[3]
+        );
+
+
+      const era =
+        parts[4]
+          .toUpperCase();
+
+
+      /*
+        If a description ever accidentally
+        contains an extra | character,
+        join everything after field 5
+        back together as the description.
+      */
+
+      const description =
+        parts
+          .slice(5)
+          .join(" | ")
+          .trim();
+
+
+      if (!category) {
+
+        errors.push(
+          `Line ${lineNumber}: Missing category.`
+        );
+
+        return;
+
+      }
+
+
+      if (!name) {
+
+        errors.push(
+          `Line ${lineNumber}: Missing name/title.`
+        );
+
+        return;
+
+      }
+
+
+      if (
+        !Number.isFinite(
+          sortYear
+        )
+      ) {
+
+        errors.push(
+          `Line ${lineNumber}: Timeline Year must be a number.`
+        );
+
+        return;
+
+      }
+
+
+      if (
+        era !== "CE" &&
+        era !== "BCE"
+      ) {
+
+        errors.push(
+          `Line ${lineNumber}: Era must be CE or BCE.`
+        );
+
+        return;
+
+      }
+
+
+      results.push({
+
+        lineNumber,
+
+        category,
+
+        name,
+
+        dateLabel,
+
+        sortYear,
+
+        era,
+
+        description
+
+      });
+
+    }
+  );
+
+
+  return {
+
+    entries: results,
+
+    errors
+
+  };
+
+}
+
+
+/* =========================================================
+   BULK IMPORT PREVIEW
+========================================================= */
+
+document.getElementById(
+  "previewImportButton"
+).addEventListener(
+  "click",
+  () => {
+
+    const text =
+      document.getElementById(
+        "bulkImportText"
+      ).value;
+
+
+    const parsed =
+      parseBulkImport(
+        text
+      );
+
+
+    pendingBulkEntries =
+      parsed.entries;
+
+
+    const preview =
+      document.getElementById(
+        "bulkImportPreview"
+      );
+
+
+    const confirmButton =
+      document.getElementById(
+        "confirmImportButton"
+      );
+
+
+    let html =
+      "";
+
+
+    parsed.errors.forEach(
+      error => {
+
+        html += `
+
+          <div class="importError">
+            ${escapeHTML(
+              error
+            )}
+          </div>
+
+        `;
+
+      }
+    );
+
+
+    if (
+      parsed.entries.length
+    ) {
+
+      html += `
+
+        <div class="sectionHeading">
+          ${parsed.entries.length}
+          ${
+            parsed.entries.length === 1
+            ? "Entry"
+            : "Entries"
+          }
+        </div>
+
+      `;
+
+
+      parsed.entries.forEach(
+        entry => {
+
+          html += `
+
+            <div class="importPreviewCard">
+
+              <div class="importPreviewTitle">
+                ${escapeHTML(
+                  entry.name
+                )}
+              </div>
+
+              <div class="importPreviewMeta">
+
+                ${escapeHTML(
+                  entry.category
+                )}
+
+                •
+
+                ${escapeHTML(
+                  entry.dateLabel
+                )}
+
+                •
+
+                ${entry.sortYear}
+                ${entry.era}
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      );
+
+    }
+
+
+    if (
+      !parsed.entries.length &&
+      !parsed.errors.length
+    ) {
+
+      html = `
+
+        <div class="empty">
+
+          <div class="emptyTitle">
+            Nothing to import
+          </div>
+
+          Paste historical entries above.
+
+        </div>
+
+      `;
+
+    }
+
+
+    preview.innerHTML =
+      html;
+
+
+    confirmButton.style.display =
+      parsed.entries.length &&
+      !parsed.errors.length
+
+      ? "block"
+
+      : "none";
+
+  }
+);
+
+
+/* =========================================================
+   CONFIRM BULK IMPORT
+========================================================= */
+
+document.getElementById(
+  "confirmImportButton"
+).addEventListener(
+  "click",
+  async () => {
+
+    if (
+      !pendingBulkEntries.length
+    ) {
+      return;
+    }
+
+
+    const total =
+      pendingBulkEntries.length;
+
+
+    for (
+      const imported
+      of pendingBulkEntries
+    ) {
+
+      const category =
+        await getOrCreateCategory(
+          imported.category
+        );
+
+
+      const entry = {
+
+        categoryId:
+          category.id,
+
+        name:
+          imported.name,
+
+        dateLabel:
+          imported.dateLabel,
+
+        sortYear:
+          imported.sortYear,
+
+        era:
+          imported.era,
+
+        description:
+          imported.description,
+
+        photos: [],
+
+        updated:
+          Date.now()
+
+      };
+
+
+      await saveEntry(
+        entry
+      );
+
+    }
+
+
+    await loadEntries();
+
+    await loadCategories();
+
+
+    renderTabs();
+
+    render();
+
+
+    document.getElementById(
+      "bulkImportText"
+    ).value = "";
+
+
+    document.getElementById(
+      "bulkImportPreview"
+    ).innerHTML = "";
+
+
+    document.getElementById(
+      "confirmImportButton"
+    ).style.display =
+      "none";
+
+
+    pendingBulkEntries =
+      [];
+
+
+    closeModal(
+      "bulkImportOverlay"
+    );
+
+
+    alert(
+      `${total} ${
+        total === 1
+        ? "entry"
+        : "entries"
+      } imported successfully.`
+    );
+
+  }
+);
+
+
+/* =========================================================
+   OPEN BULK IMPORT
+========================================================= */
+
+function openBulkImport() {
+
+  closeModal(
+    "settingsOverlay"
+  );
+
+
+  pendingBulkEntries =
+    [];
+
+
+  document.getElementById(
+    "bulkImportPreview"
+  ).innerHTML =
+    "";
+
+
+  document.getElementById(
+    "confirmImportButton"
+  ).style.display =
+    "none";
+
+
+  openModal(
+    "bulkImportOverlay"
+  );
+
+}
+
+
+document.getElementById(
+  "bulkImportTopButton"
+).addEventListener(
+  "click",
+  openBulkImport
+);
+
+
+document.getElementById(
+  "bulkImportSettingsButton"
+).addEventListener(
+  "click",
+  openBulkImport
+);
+
+
+/* =========================================================
    MODALS
-========================================================== */
+========================================================= */
 
 function openModal(id) {
 
   document
     .getElementById(id)
     .classList
-    .add("visible");
+    .add(
+      "visible"
+    );
 
 }
 
@@ -2781,72 +4390,69 @@ function closeModal(id) {
   document
     .getElementById(id)
     .classList
-    .remove("visible");
+    .remove(
+      "visible"
+    );
 
 }
 
 
 document.querySelectorAll(
   "[data-close]"
-).forEach(button => {
+).forEach(
+  button => {
 
-  button.addEventListener(
-    "click",
-    () => {
+    button.addEventListener(
+      "click",
+      () => {
 
-      closeModal(
-        button.dataset.close
-      );
+        closeModal(
+          button.dataset.close
+        );
 
-    }
-  );
+      }
+    );
 
-});
+  }
+);
 
 
 document.querySelectorAll(
   ".modalOverlay"
-).forEach(overlay => {
+).forEach(
+  overlay => {
 
-  overlay.addEventListener(
-    "click",
-    event => {
+    overlay.addEventListener(
+      "click",
+      event => {
 
-      if (
-        event.target === overlay
-      ) {
+        if (
+          event.target ===
+          overlay
+        ) {
 
-        closeModal(
-          overlay.id
-        );
+          closeModal(
+            overlay.id
+          );
+
+        }
 
       }
+    );
 
-    }
-  );
-
-});
+  }
+);
 
 
-/* ==========================================================
-   BUTTONS
-========================================================== */
+/* =========================================================
+   MAIN BUTTONS
+========================================================= */
 
 document.getElementById(
   "addButton"
 ).addEventListener(
   "click",
   () => {
-
-    if (!categories.length) {
-
-      alert(
-        "Create a category first."
-      );
-
-      return;
-
-    }
 
     openEditor();
 
@@ -2878,7 +4484,9 @@ document.getElementById(
       "settingsOverlay"
     );
 
+
     renderCategoryList();
+
 
     openModal(
       "categoryOverlay"
@@ -2896,9 +4504,9 @@ document.getElementById(
 );
 
 
-/* ==========================================================
-   EXPORT DATABASE
-========================================================== */
+/* =========================================================
+   EXPORT BACKUP
+========================================================= */
 
 document.getElementById(
   "exportButton"
@@ -2908,16 +4516,18 @@ document.getElementById(
 
     const backup = {
 
-      version: 2,
+      version: 3,
 
       created:
-        new Date().toISOString(),
+        new Date()
+          .toISOString(),
 
       categories,
 
       entries
 
     };
+
 
     const blob =
       new Blob(
@@ -2934,29 +4544,37 @@ document.getElementById(
         }
       );
 
+
     const url =
       URL.createObjectURL(
         blob
       );
+
 
     const link =
       document.createElement(
         "a"
       );
 
+
     link.href =
       url;
 
+
     link.download =
       "history-timeline-backup.json";
+
 
     document.body.appendChild(
       link
     );
 
+
     link.click();
 
+
     link.remove();
+
 
     URL.revokeObjectURL(
       url
@@ -2966,9 +4584,9 @@ document.getElementById(
 );
 
 
-/* ==========================================================
-   IMPORT DATABASE
-========================================================== */
+/* =========================================================
+   IMPORT BACKUP
+========================================================= */
 
 document.getElementById(
   "importFile"
@@ -2979,38 +4597,51 @@ document.getElementById(
     const file =
       event.target.files[0];
 
+
     if (!file) {
       return;
     }
+
 
     try {
 
       const text =
         await file.text();
 
+
       const data =
-        JSON.parse(text);
+        JSON.parse(
+          text
+        );
+
 
       if (
-        !Array.isArray(data.entries)
+        !Array.isArray(
+          data.entries
+        )
       ) {
 
         throw new Error(
-          "Invalid backup."
+          "Invalid backup"
         );
 
       }
 
-      const confirmed =
-        confirm(
+
+      if (
+        !confirm(
           "Import this backup?"
-        );
+        )
+      ) {
 
-      if (!confirmed) {
         return;
+
       }
 
-      const categoryMap = {};
+
+      const categoryMap =
+        {};
+
 
       if (
         Array.isArray(
@@ -3023,42 +4654,31 @@ document.getElementById(
           of data.categories
         ) {
 
-          const existing =
-            categories.find(
-              category =>
-                category.name
-                  .toLowerCase() ===
-                importedCategory.name
-                  .toLowerCase()
+          let category =
+            findCategoryByName(
+              importedCategory.name
             );
 
-          if (existing) {
 
-            categoryMap[
-              importedCategory.id
-            ] =
-              existing.id;
+          if (!category) {
 
-          } else {
-
-            const newId =
-              await saveCategory({
-                name:
-                  importedCategory.name
-              });
-
-            categoryMap[
-              importedCategory.id
-            ] =
-              newId;
+            category =
+              await getOrCreateCategory(
+                importedCategory.name
+              );
 
           }
+
+
+          categoryMap[
+            importedCategory.id
+          ] =
+            category.id;
 
         }
 
       }
 
-      await loadCategories();
 
       for (
         const importedEntry
@@ -3066,9 +4686,13 @@ document.getElementById(
       ) {
 
         const copy =
-          {...importedEntry};
+          {
+            ...importedEntry
+          };
+
 
         delete copy.id;
+
 
         if (
           categoryMap[
@@ -3083,31 +4707,41 @@ document.getElementById(
 
         }
 
+
         await saveEntry(
           copy
         );
 
       }
 
+
       await loadEntries();
+
+      await loadCategories();
+
 
       renderTabs();
 
       render();
 
+
       closeModal(
         "settingsOverlay"
       );
 
+
       alert(
-        "Import complete."
+        "Backup imported."
       );
 
     }
 
-    catch (error) {
+    catch(error) {
 
-      console.error(error);
+      console.error(
+        error
+      );
+
 
       alert(
         "That file could not be imported."
@@ -3115,15 +4749,17 @@ document.getElementById(
 
     }
 
-    event.target.value = "";
+
+    event.target.value =
+      "";
 
   }
 );
 
 
-/* ==========================================================
+/* =========================================================
    ERASE DATABASE
-========================================================== */
+========================================================= */
 
 document.getElementById(
   "eraseButton"
@@ -3131,23 +4767,23 @@ document.getElementById(
   "click",
   async () => {
 
-    const confirmed =
-      confirm(
+    if (
+      !confirm(
         "Erase all historical entries and categories?"
-      );
-
-    if (!confirmed) {
+      )
+    ) {
       return;
     }
 
-    const second =
-      confirm(
+
+    if (
+      !confirm(
         "This cannot be undone unless you have a backup. Continue?"
-      );
-
-    if (!second) {
+      )
+    ) {
       return;
     }
+
 
     const transaction =
       db.transaction(
@@ -3158,11 +4794,13 @@ document.getElementById(
         "readwrite"
       );
 
+
     transaction
       .objectStore(
         ENTRY_STORE
       )
       .clear();
+
 
     transaction
       .objectStore(
@@ -3170,20 +4808,26 @@ document.getElementById(
       )
       .clear();
 
+
     transaction.oncomplete =
       async () => {
 
         entries = [];
+
         categories = [];
 
+
         await createDefaultCategories();
+
 
         currentView =
           "timeline";
 
+
         renderTabs();
 
         render();
+
 
         closeModal(
           "settingsOverlay"
@@ -3195,9 +4839,9 @@ document.getElementById(
 );
 
 
-/* ==========================================================
+/* =========================================================
    INITIALIZE
-========================================================== */
+========================================================= */
 
 async function initializeApp() {
 
@@ -3217,9 +4861,12 @@ async function initializeApp() {
 
   }
 
-  catch (error) {
+  catch(error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
+
 
     document.getElementById(
       "mainContent"
@@ -3240,6 +4887,7 @@ async function initializeApp() {
   }
 
 }
+
 
 initializeApp();
 
