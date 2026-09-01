@@ -13,21 +13,22 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="History">
 
-<title>History</title>
+<title>History Timeline</title>
 
 <style>
 
 :root {
   --bg: #f6f8fc;
   --card: #ffffff;
-  --navy: #10204d;
+  --navy: #0b225a;
   --blue: #1769e0;
   --blue-light: #eaf2ff;
-  --text: #111b33;
+  --text: #121a2f;
   --gray: #69738a;
   --border: #dfe5ef;
   --red: #d83a44;
   --green: #16845b;
+  --purple: #7048c8;
   --shadow: 0 5px 18px rgba(15,31,73,.08);
 }
 
@@ -39,7 +40,6 @@
 html,
 body {
   margin: 0;
-  padding: 0;
   min-height: 100%;
   background: var(--bg);
   color: var(--text);
@@ -69,8 +69,9 @@ button {
 }
 
 button:active {
-  transform: scale(.98);
+  transform: scale(.985);
 }
+
 
 /* =========================================================
    HEADER
@@ -80,13 +81,15 @@ header {
   position: sticky;
   top: 0;
   z-index: 50;
+
   background: rgba(246,248,252,.95);
+
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 
   padding:
-    calc(env(safe-area-inset-top) + 14px)
-    16px
+    calc(env(safe-area-inset-top) + 13px)
+    15px
     10px;
 
   border-bottom: 1px solid rgba(0,0,0,.05);
@@ -94,14 +97,15 @@ header {
 
 .headerRow {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  gap: 12px;
 }
 
 .appTitle {
+  color: var(--navy);
   font-size: 29px;
   font-weight: 820;
-  color: var(--navy);
   letter-spacing: -.7px;
 }
 
@@ -113,19 +117,16 @@ header {
 .iconButton {
   width: 42px;
   height: 42px;
+
   border: 0;
   border-radius: 14px;
 
   background: var(--blue-light);
   color: var(--blue);
 
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 750;
 }
-
-/* =========================================================
-   SEARCH
-========================================================= */
 
 .searchWrap {
   margin-top: 12px;
@@ -133,21 +134,23 @@ header {
 
 .searchInput {
   width: 100%;
+
   border: 1px solid var(--border);
   border-radius: 14px;
 
-  background: white;
-
   padding: 12px 14px;
 
-  outline: none;
+  background: white;
 
   font-size: 16px;
+
+  outline: none;
 }
 
 .searchInput:focus {
   border-color: var(--blue);
 }
+
 
 /* =========================================================
    TABS
@@ -170,27 +173,25 @@ header {
 
 .tab {
   border: 0;
-
-  background: transparent;
-
-  color: var(--gray);
+  border-radius: 12px;
 
   padding: 9px 13px;
 
-  border-radius: 12px;
-
-  white-space: nowrap;
+  background: transparent;
+  color: var(--gray);
 
   font-weight: 720;
+
+  white-space: nowrap;
 }
 
 .tab.active {
   background: white;
   color: var(--blue);
 
-  box-shadow:
-    0 2px 10px rgba(0,0,0,.06);
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
 }
+
 
 /* =========================================================
    MAIN
@@ -198,237 +199,368 @@ header {
 
 main {
   width: 100%;
-  max-width: 760px;
+  max-width: 780px;
 
   margin: auto;
 
-  padding:
-    12px
-    15px
-    110px;
+  padding: 12px 13px 110px;
 }
 
-/* =========================================================
-   EMPTY
-========================================================= */
-
 .empty {
-  background: white;
-
-  border:
-    1px solid var(--border);
-
-  border-radius: 20px;
-
   margin-top: 24px;
 
-  padding:
-    35px 20px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+
+  background: white;
+
+  padding: 35px 20px;
 
   text-align: center;
-
   color: var(--gray);
 }
 
 .emptyTitle {
+  margin-bottom: 7px;
+
   color: var(--navy);
 
   font-size: 21px;
-
   font-weight: 800;
-
-  margin-bottom: 7px;
 }
+
 
 /* =========================================================
    TIMELINE
 ========================================================= */
 
-.timeline {
+.timelineRoot {
   position: relative;
-
-  padding-top: 10px;
+  padding-top: 6px;
 }
 
-.timeline::before {
-  content: "";
-
-  position: absolute;
-
-  left: 21px;
-  top: 12px;
-  bottom: 18px;
-
-  width: 3px;
-
-  border-radius: 10px;
-
-  background: #cbd9ee;
-}
-
-.timelineItem {
+.timelineEntry {
   position: relative;
-
-  padding-left: 52px;
-
-  margin-bottom: 16px;
 }
 
-.timelineDot {
-  position: absolute;
 
-  left: 13px;
-  top: 22px;
+/* LEVEL 0 */
 
-  width: 19px;
-  height: 19px;
-
-  border-radius: 50%;
-
-  border: 4px solid var(--bg);
-
-  box-shadow:
-    0 0 0 2px #b8c9e4;
-
-  background: var(--blue);
+.timelineEntry.level0 {
+  margin-bottom: 22px;
 }
 
-.itemCard {
-  border:
-    1px solid var(--border);
 
-  background: white;
+/* MAJOR TOP-LEVEL TITLE */
 
-  border-radius: 18px;
+.majorCard {
+  position: relative;
 
   overflow: hidden;
+
+  border: 1px solid #cbd8ed;
+  border-radius: 20px;
+
+  background: white;
 
   box-shadow: var(--shadow);
 }
 
-.itemCardButton {
+.majorCard.hasChildren {
+  border-color: #b6c9e8;
+}
+
+.majorHeader {
   width: 100%;
 
   border: 0;
 
+  padding: 17px;
+
   background: transparent;
 
   text-align: left;
-
-  padding: 16px;
 }
 
-.cardTop {
-  display: flex;
-
-  justify-content:
-    space-between;
-
-  align-items:
-    flex-start;
-
-  gap: 12px;
-}
-
-.typeBadge {
+.majorCategory {
   display: inline-block;
 
-  padding:
-    6px 8px;
+  margin-bottom: 7px;
+
+  padding: 5px 8px;
 
   border-radius: 20px;
 
-  background:
-    var(--blue-light);
-
-  color:
-    var(--blue);
-
-  font-size: 11px;
-
-  font-weight: 800;
-
-  letter-spacing: .5px;
-
-  text-transform: uppercase;
-
-  margin-bottom: 8px;
-}
-
-.cardTitle {
-  color: var(--navy);
-
-  font-size: 19px;
-
-  font-weight: 780;
-
-  line-height: 1.25;
-}
-
-.cardDate {
+  background: var(--blue-light);
   color: var(--blue);
 
-  font-size: 14px;
+  font-size: 10px;
+  font-weight: 820;
 
-  font-weight: 700;
+  letter-spacing: .55px;
 
-  margin-top: 5px;
+  text-transform: uppercase;
 }
 
-.previewText {
+.majorTitle {
+  color: var(--navy);
+
+  font-size: 23px;
+  font-weight: 820;
+
+  line-height: 1.15;
+  letter-spacing: -.35px;
+}
+
+.majorDate {
+  margin-top: 7px;
+
+  color: var(--blue);
+
+  font-size: 15px;
+  font-weight: 740;
+}
+
+.majorPreview {
+  margin-top: 9px;
+
   color: var(--gray);
 
   font-size: 14px;
+  line-height: 1.45;
+}
 
-  line-height: 1.5;
 
-  margin-top: 10px;
+/* =========================================================
+   CHILD TIMELINE
+========================================================= */
+
+.childrenContainer {
+  position: relative;
+
+  margin-left: 16px;
+  padding-left: 22px;
+  padding-top: 11px;
+}
+
+.childrenContainer::before {
+  content: "";
+
+  position: absolute;
+
+  left: 6px;
+  top: 0;
+  bottom: 10px;
+
+  width: 2px;
+
+  border-radius: 3px;
+
+  background: #c8d5e9;
+}
+
+.childEntry {
+  position: relative;
+
+  margin-bottom: 11px;
+}
+
+.childEntry::before {
+  content: "";
+
+  position: absolute;
+
+  left: -16px;
+  top: 23px;
+
+  width: 16px;
+  height: 2px;
+
+  background: #c8d5e9;
+}
+
+.childDot {
+  position: absolute;
+
+  left: -21px;
+  top: 18px;
+
+  width: 11px;
+  height: 11px;
+
+  border: 3px solid var(--bg);
+  border-radius: 50%;
+
+  background: var(--blue);
+
+  box-shadow: 0 0 0 1px #adc0df;
+}
+
+.childCard {
+  overflow: hidden;
+
+  border: 1px solid var(--border);
+  border-radius: 15px;
+
+  background: white;
+}
+
+.childCardButton {
+  width: 100%;
+
+  border: 0;
+
+  padding: 12px 13px;
+
+  background: transparent;
+
+  text-align: left;
+}
+
+.childCardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 10px;
+}
+
+.childCategory {
+  display: inline-block;
+
+  margin-bottom: 5px;
+
+  padding: 4px 6px;
+
+  border-radius: 14px;
+
+  background: #f0f4fb;
+  color: var(--gray);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+
+.childTitle {
+  color: var(--navy);
+
+  font-size: 17px;
+  font-weight: 760;
+
+  line-height: 1.22;
+}
+
+.childDate {
+  margin-top: 4px;
+
+  color: var(--blue);
+
+  font-size: 13px;
+  font-weight: 690;
+}
+
+.childPreview {
+  margin-top: 7px;
+
+  color: var(--gray);
+
+  font-size: 13px;
+  line-height: 1.4;
 }
 
 .photoIndicator {
   flex-shrink: 0;
 
-  background: #f1f4f8;
+  padding: 5px 7px;
 
+  border-radius: 9px;
+
+  background: #f1f4f8;
   color: var(--gray);
 
-  padding:
-    6px 8px;
-
-  border-radius: 10px;
-
-  font-size: 13px;
-
+  font-size: 11px;
   font-weight: 700;
 }
 
+
+/* deeper levels */
+
+.timelineEntry.depth2 .childCard {
+  background: #fbfcff;
+}
+
+.timelineEntry.depth3 .childCard,
+.timelineEntry.depth4 .childCard,
+.timelineEntry.depth5 .childCard {
+  background: #f9fafc;
+}
+
+.timelineEntry.depth2 .childTitle {
+  font-size: 16px;
+}
+
+.timelineEntry.depth3 .childTitle,
+.timelineEntry.depth4 .childTitle,
+.timelineEntry.depth5 .childTitle {
+  font-size: 15px;
+}
+
+
 /* =========================================================
-   LISTS
+   DATE DIVIDERS
+========================================================= */
+
+.dateDivider {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  margin: 19px 3px 10px;
+}
+
+.dateDividerLine {
+  flex: 1;
+  height: 1px;
+
+  background: #d6deea;
+}
+
+.dateDividerText {
+  color: #7a8497;
+
+  font-size: 12px;
+  font-weight: 750;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   CATEGORY / ALL LIST
 ========================================================= */
 
 .sectionHeading {
+  margin: 16px 2px 12px;
+
   color: var(--navy);
 
   font-size: 22px;
-
   font-weight: 800;
-
-  margin:
-    16px 2px
-    12px;
 }
 
 .listCard {
-  background: white;
-
-  border:
-    1px solid var(--border);
-
-  border-radius: 17px;
+  overflow: hidden;
 
   margin-bottom: 10px;
 
-  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+
+  background: white;
 }
 
 .listCard button {
@@ -436,9 +568,9 @@ main {
 
   border: 0;
 
-  background: transparent;
-
   padding: 15px;
+
+  background: transparent;
 
   text-align: left;
 }
@@ -447,17 +579,26 @@ main {
   color: var(--navy);
 
   font-size: 18px;
-
   font-weight: 760;
 }
 
 .listMeta {
+  margin-top: 5px;
+
   color: var(--gray);
 
   font-size: 13px;
-
-  margin-top: 5px;
 }
+
+.listParent {
+  margin-top: 6px;
+
+  color: var(--purple);
+
+  font-size: 12px;
+  font-weight: 650;
+}
+
 
 /* =========================================================
    ADD BUTTON
@@ -466,24 +607,20 @@ main {
 .addButton {
   position: fixed;
 
+  z-index: 80;
+
   right: 22px;
 
   bottom:
-    calc(
-      env(safe-area-inset-bottom) + 22px
-    );
-
-  z-index: 80;
+    calc(env(safe-area-inset-bottom) + 22px);
 
   width: 62px;
   height: 62px;
 
   border: 0;
-
   border-radius: 50%;
 
   background: var(--blue);
-
   color: white;
 
   font-size: 34px;
@@ -493,23 +630,21 @@ main {
     rgba(23,105,224,.35);
 }
 
+
 /* =========================================================
-   MODAL
+   MODALS
 ========================================================= */
 
 .modalOverlay {
   position: fixed;
-
   inset: 0;
 
   z-index: 1000;
 
   display: none;
-
   align-items: flex-end;
 
-  background:
-    rgba(5,13,32,.45);
+  background: rgba(5,13,32,.45);
 }
 
 .modalOverlay.visible {
@@ -518,56 +653,43 @@ main {
 
 .modal {
   width: 100%;
-
   max-height: 94vh;
 
   overflow-y: auto;
 
+  border-radius: 24px 24px 0 0;
+
   background: white;
 
-  border-radius:
-    24px 24px 0 0;
-
   padding-bottom:
-    calc(
-      env(safe-area-inset-bottom)
-      + 18px
-    );
+    calc(env(safe-area-inset-bottom) + 18px);
 }
 
 .modalHandle {
   width: 42px;
-
   height: 5px;
+
+  margin: 9px auto 2px;
 
   border-radius: 10px;
 
   background: #d3d7df;
-
-  margin:
-    9px auto 2px;
 }
 
 .modalHeader {
   display: flex;
-
-  justify-content:
-    space-between;
-
+  justify-content: space-between;
   align-items: center;
 
-  padding:
-    13px 17px;
+  padding: 13px 17px;
 
-  border-bottom:
-    1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .modalTitle {
   color: var(--navy);
 
   font-size: 21px;
-
   font-weight: 800;
 }
 
@@ -576,11 +698,9 @@ main {
   height: 35px;
 
   border: 0;
-
   border-radius: 50%;
 
   background: #eff1f5;
-
   color: #50596d;
 
   font-size: 20px;
@@ -589,6 +709,7 @@ main {
 .modalContent {
   padding: 18px;
 }
+
 
 /* =========================================================
    FORMS
@@ -601,14 +722,12 @@ main {
 .field label {
   display: block;
 
+  margin: 0 0 7px 2px;
+
   color: var(--navy);
 
   font-size: 13px;
-
   font-weight: 750;
-
-  margin:
-    0 0 7px 2px;
 }
 
 .field input,
@@ -616,9 +735,7 @@ main {
 .field select {
   width: 100%;
 
-  border:
-    1px solid var(--border);
-
+  border: 1px solid var(--border);
   border-radius: 13px;
 
   padding: 12px;
@@ -646,21 +763,18 @@ main {
 
 .formRow {
   display: grid;
-
-  grid-template-columns:
-    1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 
   gap: 10px;
 }
 
 .smallHelp {
+  margin-top: 6px;
+
   color: var(--gray);
 
   font-size: 12px;
-
   line-height: 1.45;
-
-  margin-top: 6px;
 }
 
 .primaryButton,
@@ -672,7 +786,6 @@ main {
   padding: 14px;
 
   font-size: 16px;
-
   font-weight: 750;
 }
 
@@ -680,24 +793,25 @@ main {
   border: 0;
 
   background: var(--blue);
-
   color: white;
 }
 
 .secondaryButton {
-  border:
-    1px solid var(--border);
+  border: 1px solid var(--border);
 
   background: white;
-
   color: var(--navy);
 }
 
 .dangerButton {
   border-color: #ffd3d5;
-
   color: var(--red);
 }
+
+.buttonGap {
+  margin-top: 10px;
+}
+
 
 /* =========================================================
    DETAILS
@@ -711,7 +825,6 @@ main {
   color: var(--blue);
 
   font-size: 12px;
-
   font-weight: 800;
 
   letter-spacing: .6px;
@@ -720,27 +833,34 @@ main {
 }
 
 .detailTitle {
+  margin-top: 6px;
+  padding-right: 65px;
+
   color: var(--navy);
 
   font-size: 28px;
-
   font-weight: 820;
 
   line-height: 1.12;
 
   letter-spacing: -.5px;
-
-  margin-top: 6px;
-
-  padding-right: 65px;
 }
 
 .detailDate {
+  margin-top: 8px;
+
   color: var(--blue);
 
   font-weight: 700;
+}
 
-  margin-top: 8px;
+.detailParent {
+  margin-top: 7px;
+
+  color: var(--purple);
+
+  font-size: 13px;
+  font-weight: 650;
 }
 
 .editMiniButton {
@@ -750,38 +870,41 @@ main {
   right: 0;
 
   border: 0;
-
   border-radius: 12px;
 
-  padding:
-    8px 10px;
+  padding: 8px 10px;
 
-  background:
-    var(--blue-light);
-
+  background: var(--blue-light);
   color: var(--blue);
 
   font-weight: 700;
 }
 
+.detailActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 9px;
+
+  margin-top: 18px;
+}
+
 .descriptionHeading {
+  margin: 22px 0 8px;
+
   color: var(--navy);
 
   font-size: 16px;
-
   font-weight: 800;
-
-  margin:
-    22px 0 8px;
 }
 
 .detailDescription {
-  font-size: 16px;
-
-  line-height: 1.6;
-
   white-space: pre-wrap;
+
+  font-size: 16px;
+  line-height: 1.6;
 }
+
 
 /* =========================================================
    GALLERY
@@ -790,12 +913,11 @@ main {
 .gallery {
   position: relative;
 
-  margin:
-    20px -18px 0;
+  overflow: hidden;
+
+  margin: 20px -18px 0;
 
   background: #101318;
-
-  overflow: hidden;
 }
 
 .galleryTrack {
@@ -803,8 +925,7 @@ main {
 
   overflow-x: auto;
 
-  scroll-snap-type:
-    x mandatory;
+  scroll-snap-type: x mandatory;
 
   scrollbar-width: none;
 }
@@ -814,21 +935,15 @@ main {
 }
 
 .gallerySlide {
-  flex:
-    0 0 100%;
+  flex: 0 0 100%;
 
   height: 330px;
 
   display: flex;
+  justify-content: center;
+  align-items: center;
 
-  justify-content:
-    center;
-
-  align-items:
-    center;
-
-  scroll-snap-align:
-    start;
+  scroll-snap-align: start;
 }
 
 .gallerySlide img {
@@ -844,21 +959,19 @@ main {
   right: 10px;
   bottom: 10px;
 
-  background:
-    rgba(0,0,0,.58);
-
-  color: white;
-
-  padding:
-    5px 9px;
+  padding: 5px 9px;
 
   border-radius: 15px;
+
+  background: rgba(0,0,0,.58);
+  color: white;
 
   font-size: 12px;
 }
 
+
 /* =========================================================
-   PHOTOS
+   PHOTO EDITOR
 ========================================================= */
 
 .photoPreviewGrid {
@@ -875,11 +988,11 @@ main {
 .photoPreview {
   position: relative;
 
+  overflow: hidden;
+
   aspect-ratio: 1;
 
   border-radius: 11px;
-
-  overflow: hidden;
 
   background: #e8ecf2;
 }
@@ -901,31 +1014,26 @@ main {
   height: 25px;
 
   border: 0;
-
   border-radius: 50%;
 
-  background:
-    rgba(0,0,0,.7);
-
+  background: rgba(0,0,0,.7);
   color: white;
 }
 
+
 /* =========================================================
-   CATEGORIES
+   CATEGORY MANAGER
 ========================================================= */
 
 .categoryRow {
   display: flex;
-
   align-items: center;
 
   gap: 8px;
 
-  padding:
-    10px 0;
+  padding: 10px 0;
 
-  border-bottom:
-    1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .categoryName {
@@ -938,47 +1046,86 @@ main {
 
 .smallAction {
   border: 0;
-
   border-radius: 10px;
 
-  padding:
-    7px 9px;
+  padding: 7px 9px;
 
-  background:
-    var(--blue-light);
-
+  background: var(--blue-light);
   color: var(--blue);
 
   font-size: 13px;
-
   font-weight: 700;
 }
 
 .smallDanger {
   background: #fff0f1;
-
   color: var(--red);
 }
+
+
+/* =========================================================
+   MOVE / REORDER
+========================================================= */
+
+.moveInfo {
+  margin-bottom: 16px;
+
+  padding: 12px;
+
+  border-radius: 13px;
+
+  background: #f4f7fb;
+}
+
+.moveTitle {
+  color: var(--navy);
+
+  font-size: 17px;
+  font-weight: 770;
+}
+
+.moveMeta {
+  margin-top: 4px;
+
+  color: var(--gray);
+
+  font-size: 12px;
+}
+
+.moveButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+}
+
+.hierarchyPath {
+  margin-top: 8px;
+
+  color: var(--purple);
+
+  font-size: 12px;
+  line-height: 1.4;
+}
+
 
 /* =========================================================
    SETTINGS
 ========================================================= */
 
 .settingsSection {
-  border-top:
-    1px solid var(--border);
-
   margin-top: 18px;
-
   padding-top: 18px;
+
+  border-top: 1px solid var(--border);
 }
 
 .settingsHeading {
+  margin-bottom: 10px;
+
   color: var(--navy);
 
   font-weight: 800;
-
-  margin-bottom: 10px;
 }
 
 .fileButton {
@@ -986,14 +1133,12 @@ main {
 
   width: 100%;
 
-  border:
-    1px solid var(--border);
+  margin-top: 10px;
 
+  border: 1px solid var(--border);
   border-radius: 14px;
 
   padding: 13px;
-
-  margin-top: 10px;
 
   text-align: center;
 
@@ -1006,20 +1151,18 @@ main {
   display: none;
 }
 
+
 /* =========================================================
    BULK IMPORT
 ========================================================= */
 
 .importTextArea {
   width: 100%;
-
-  min-height: 270px;
+  min-height: 280px;
 
   resize: vertical;
 
-  border:
-    1px solid var(--border);
-
+  border: 1px solid var(--border);
   border-radius: 14px;
 
   padding: 13px;
@@ -1034,7 +1177,6 @@ main {
     monospace;
 
   font-size: 13px;
-
   line-height: 1.5;
 }
 
@@ -1043,21 +1185,17 @@ main {
 }
 
 .importFormat {
-  background: #f3f6fb;
-
-  border-radius: 13px;
+  margin-bottom: 15px;
 
   padding: 12px;
 
-  margin-bottom: 15px;
+  border-radius: 13px;
 
+  background: #f3f6fb;
   color: var(--gray);
 
   font-size: 12px;
-
   line-height: 1.5;
-
-  overflow-wrap: anywhere;
 }
 
 .importPreview {
@@ -1065,14 +1203,12 @@ main {
 }
 
 .importPreviewCard {
-  border:
-    1px solid var(--border);
+  margin-bottom: 8px;
 
+  border: 1px solid var(--border);
   border-radius: 13px;
 
   padding: 12px;
-
-  margin-bottom: 8px;
 
   background: #fafbfe;
 }
@@ -1084,26 +1220,26 @@ main {
 }
 
 .importPreviewMeta {
+  margin-top: 4px;
+
   color: var(--gray);
 
   font-size: 12px;
-
-  margin-top: 4px;
 }
 
 .importError {
-  color: var(--red);
-
-  background: #fff4f4;
-
-  padding: 10px;
+  margin-bottom: 8px;
 
   border-radius: 10px;
 
-  margin-bottom: 8px;
+  padding: 10px;
+
+  background: #fff4f4;
+  color: var(--red);
 
   font-size: 13px;
 }
+
 
 /* =========================================================
    DESKTOP
@@ -1113,7 +1249,6 @@ main {
 
   .modalOverlay {
     align-items: center;
-
     justify-content: center;
 
     padding: 30px;
@@ -1122,9 +1257,9 @@ main {
   .modal {
     max-width: 650px;
 
-    border-radius: 24px;
-
     max-height: 90vh;
+
+    border-radius: 24px;
   }
 
   .modalHandle {
@@ -1137,6 +1272,7 @@ main {
 </head>
 
 <body>
+
 
 <header>
 
@@ -1151,8 +1287,8 @@ main {
       <button
         class="iconButton"
         id="bulkImportTopButton"
-        aria-label="Bulk Import"
         title="Bulk Import"
+        aria-label="Bulk Import"
       >
         ↓
       </button>
@@ -1184,8 +1320,8 @@ main {
 
 
   <div
-    class="tabs"
     id="tabsContainer"
+    class="tabs"
   ></div>
 
 </header>
@@ -1195,8 +1331,8 @@ main {
 
 
 <button
-  class="addButton"
   id="addButton"
+  class="addButton"
   aria-label="Add Entry"
 >
   +
@@ -1205,12 +1341,12 @@ main {
 
 
 <!-- =====================================================
-     DETAIL MODAL
+     DETAIL
 ===================================================== -->
 
 <div
-  class="modalOverlay"
   id="detailOverlay"
+  class="modalOverlay"
 >
 
   <div class="modal">
@@ -1233,8 +1369,8 @@ main {
     </div>
 
     <div
-      class="modalContent"
       id="detailContent"
+      class="modalContent"
     ></div>
 
   </div>
@@ -1248,8 +1384,8 @@ main {
 ===================================================== -->
 
 <div
-  class="modalOverlay"
   id="editorOverlay"
+  class="modalOverlay"
 >
 
   <div class="modal">
@@ -1259,8 +1395,8 @@ main {
     <div class="modalHeader">
 
       <div
-        class="modalTitle"
         id="editorTitle"
+        class="modalTitle"
       >
         Add Entry
       </div>
@@ -1274,14 +1410,13 @@ main {
 
     </div>
 
-
     <div class="modalContent">
 
       <form id="entryForm">
 
         <input
-          type="hidden"
           id="entryId"
+          type="hidden"
         >
 
 
@@ -1318,6 +1453,25 @@ main {
         <div class="field">
 
           <label>
+            Parent Entry
+          </label>
+
+          <select id="parentEntry"></select>
+
+          <div class="smallHelp">
+
+            Leave this as Top Level if this is a major
+            historical topic. Select another entry to make
+            this a subevent.
+
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
             Display Date
           </label>
 
@@ -1326,10 +1480,6 @@ main {
             type="text"
             placeholder="e.g. 1955–1975"
           >
-
-          <div class="smallHelp">
-            This is the date shown to you in the app.
-          </div>
 
         </div>
 
@@ -1404,7 +1554,10 @@ main {
           >
 
           <div class="smallHelp">
-            Add several images. You can swipe through them when viewing the entry.
+
+            You may add multiple photographs.
+            Swipe through them when viewing the entry.
+
           </div>
 
           <div
@@ -1424,10 +1577,20 @@ main {
 
 
         <button
-          class="secondaryButton dangerButton"
-          id="deleteEntryButton"
+          id="moveFromEditorButton"
+          class="secondaryButton buttonGap"
           type="button"
-          style="display:none;margin-top:10px;"
+          style="display:none;"
+        >
+          Move / Reorder
+        </button>
+
+
+        <button
+          id="deleteEntryButton"
+          class="secondaryButton dangerButton buttonGap"
+          type="button"
+          style="display:none;"
         >
           Delete Entry
         </button>
@@ -1443,12 +1606,123 @@ main {
 
 
 <!-- =====================================================
+     MOVE / REORDER
+===================================================== -->
+
+<div
+  id="moveOverlay"
+  class="modalOverlay"
+>
+
+  <div class="modal">
+
+    <div class="modalHandle"></div>
+
+    <div class="modalHeader">
+
+      <div class="modalTitle">
+        Move / Reorder
+      </div>
+
+      <button
+        class="closeButton"
+        data-close="moveOverlay"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modalContent">
+
+      <input
+        type="hidden"
+        id="moveEntryId"
+      >
+
+
+      <div
+        id="moveEntryInfo"
+        class="moveInfo"
+      ></div>
+
+
+      <div class="field">
+
+        <label>
+          Place Under
+        </label>
+
+        <select id="moveParentSelect"></select>
+
+        <div class="smallHelp">
+
+          Choose Top Level to make this a major timeline
+          heading, or select another entry to make it a
+          subevent.
+
+        </div>
+
+      </div>
+
+
+      <button
+        id="saveMoveParentButton"
+        class="primaryButton"
+      >
+        Apply Parent
+      </button>
+
+
+      <div class="settingsSection">
+
+        <div class="settingsHeading">
+          Order Within This Level
+        </div>
+
+        <div class="moveButtons">
+
+          <button
+            id="moveUpButton"
+            class="secondaryButton"
+          >
+            ↑ Move Up
+          </button>
+
+          <button
+            id="moveDownButton"
+            class="secondaryButton"
+          >
+            ↓ Move Down
+          </button>
+
+        </div>
+
+        <div class="smallHelp">
+
+          This changes the visual order among entries that
+          have the same parent.
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =====================================================
      BULK IMPORT
 ===================================================== -->
 
 <div
-  class="modalOverlay"
   id="bulkImportOverlay"
+  class="modalOverlay"
 >
 
   <div class="modal">
@@ -1475,9 +1749,12 @@ main {
 
       <div class="importFormat">
 
-        <strong>Format:</strong><br><br>
+        <strong>Format:</strong>
 
-        Category | Name | Display Date | Timeline Year | Era | Description
+        <br><br>
+
+        Category | Name | Display Date | Timeline Year |
+        Era | Parent | Description
 
         <br><br>
 
@@ -1485,7 +1762,25 @@ main {
 
         <br><br>
 
-        Categories that do not already exist will be created automatically.
+        For a top-level entry, leave Parent blank.
+
+        <br><br>
+
+        Example:
+
+        <br><br>
+
+        Events | Vietnam War | 1955–1975 | 1955 |
+        CE | | Description...
+
+        <br><br>
+
+        Events | Tet Offensive | January 1968 | 1968 |
+        CE | Vietnam War | Description...
+
+        <br><br>
+
+        Categories are created automatically if needed.
 
       </div>
 
@@ -1493,14 +1788,13 @@ main {
       <textarea
         id="bulkImportText"
         class="importTextArea"
-        placeholder="Events | Vietnam War | 1955–1975 | 1955 | CE | Description here..."
+        placeholder="Events | Vietnam War | 1955–1975 | 1955 | CE | | Description..."
       ></textarea>
 
 
       <button
-        class="secondaryButton"
         id="previewImportButton"
-        style="margin-top:12px;"
+        class="secondaryButton buttonGap"
       >
         Preview Import
       </button>
@@ -1513,8 +1807,8 @@ main {
 
 
       <button
-        class="primaryButton"
         id="confirmImportButton"
+        class="primaryButton"
         style="display:none;margin-top:15px;"
       >
         Import Entries
@@ -1533,8 +1827,8 @@ main {
 ===================================================== -->
 
 <div
-  class="modalOverlay"
   id="settingsOverlay"
+  class="modalOverlay"
 >
 
   <div class="modal">
@@ -1559,19 +1853,17 @@ main {
 
     <div class="modalContent">
 
-
       <button
-        class="primaryButton"
         id="manageCategoriesButton"
+        class="primaryButton"
       >
         Manage Categories
       </button>
 
 
       <button
-        class="secondaryButton"
         id="bulkImportSettingsButton"
-        style="margin-top:10px;"
+        class="secondaryButton buttonGap"
       >
         Bulk Import Entries
       </button>
@@ -1583,10 +1875,9 @@ main {
           Database Backup
         </div>
 
-
         <button
-          class="secondaryButton"
           id="exportButton"
+          class="secondaryButton"
         >
           Export Backup
         </button>
@@ -1597,8 +1888,8 @@ main {
           Import Backup
 
           <input
-            type="file"
             id="importFile"
+            type="file"
             accept=".json,application/json"
           >
 
@@ -1610,8 +1901,8 @@ main {
       <div class="settingsSection">
 
         <button
-          class="secondaryButton dangerButton"
           id="eraseButton"
+          class="secondaryButton dangerButton"
         >
           Erase Entire Database
         </button>
@@ -1627,12 +1918,12 @@ main {
 
 
 <!-- =====================================================
-     CATEGORIES
+     CATEGORY MANAGER
 ===================================================== -->
 
 <div
-  class="modalOverlay"
   id="categoryOverlay"
+  class="modalOverlay"
 >
 
   <div class="modal">
@@ -1673,8 +1964,8 @@ main {
 
 
       <button
-        class="primaryButton"
         id="addCategoryButton"
+        class="primaryButton"
       >
         Add Category
       </button>
@@ -1701,14 +1992,14 @@ main {
 <script>
 
 /* =========================================================
-   DATABASE VARIABLES
+   DATABASE
 ========================================================= */
 
 const DB_NAME =
   "HistoryTimelineDB";
 
 const DB_VERSION =
-  3;
+  4;
 
 const ENTRY_STORE =
   "entries";
@@ -1726,7 +2017,8 @@ let categories = [];
 let currentView =
   "timeline";
 
-let editingPhotos = [];
+let editingPhotos =
+  [];
 
 let pendingBulkEntries =
   [];
@@ -1756,41 +2048,35 @@ function openDatabase() {
 
 
           if (
-            !database
-              .objectStoreNames
-              .contains(
-                ENTRY_STORE
-              )
+            !database.objectStoreNames.contains(
+              ENTRY_STORE
+            )
           ) {
 
-            database
-              .createObjectStore(
-                ENTRY_STORE,
-                {
-                  keyPath: "id",
-                  autoIncrement: true
-                }
-              );
+            database.createObjectStore(
+              ENTRY_STORE,
+              {
+                keyPath: "id",
+                autoIncrement: true
+              }
+            );
 
           }
 
 
           if (
-            !database
-              .objectStoreNames
-              .contains(
-                CATEGORY_STORE
-              )
+            !database.objectStoreNames.contains(
+              CATEGORY_STORE
+            )
           ) {
 
-            database
-              .createObjectStore(
-                CATEGORY_STORE,
-                {
-                  keyPath: "id",
-                  autoIncrement: true
-                }
-              );
+            database.createObjectStore(
+              CATEGORY_STORE,
+              {
+                keyPath: "id",
+                autoIncrement: true
+              }
+            );
 
           }
 
@@ -1821,7 +2107,7 @@ function openDatabase() {
 
 
 /* =========================================================
-   LOAD ENTRIES
+   LOAD DATA
 ========================================================= */
 
 function loadEntries() {
@@ -1848,7 +2134,27 @@ function loadEntries() {
         () => {
 
           entries =
-            request.result || [];
+            (request.result || [])
+              .map(entry => ({
+
+                ...entry,
+
+                parentId:
+                  entry.parentId ??
+                  null,
+
+                sortOrder:
+                  Number.isFinite(
+                    Number(
+                      entry.sortOrder
+                    )
+                  )
+                    ? Number(
+                        entry.sortOrder
+                      )
+                    : 0
+
+              }));
 
           resolve();
 
@@ -1866,10 +2172,6 @@ function loadEntries() {
 
 }
 
-
-/* =========================================================
-   LOAD CATEGORIES
-========================================================= */
 
 function loadCategories() {
 
@@ -1915,7 +2217,7 @@ function loadCategories() {
 
 
 /* =========================================================
-   SAVE ENTRY
+   SAVE
 ========================================================= */
 
 function saveEntry(entry) {
@@ -1975,10 +2277,6 @@ function saveEntry(entry) {
 }
 
 
-/* =========================================================
-   SAVE CATEGORY
-========================================================= */
-
 function saveCategory(category) {
 
   return new Promise(
@@ -2037,7 +2335,7 @@ function saveCategory(category) {
 
 
 /* =========================================================
-   DELETE ENTRY
+   DELETE
 ========================================================= */
 
 function deleteEntry(id) {
@@ -2075,10 +2373,6 @@ function deleteEntry(id) {
 
 }
 
-
-/* =========================================================
-   DELETE CATEGORY
-========================================================= */
 
 function deleteCategory(id) {
 
@@ -2153,7 +2447,7 @@ async function createDefaultCategories() {
 
 
 /* =========================================================
-   HTML ESCAPE
+   HELPERS
 ========================================================= */
 
 function escapeHTML(
@@ -2162,37 +2456,18 @@ function escapeHTML(
 
   return String(value)
 
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
+    .replaceAll("&","&amp;")
 
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
+    .replaceAll("<","&lt;")
 
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
+    .replaceAll(">","&gt;")
 
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
+    .replaceAll('"',"&quot;")
 
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
+    .replaceAll("'","&#039;");
 
 }
 
-
-/* =========================================================
-   CHRONOLOGY
-========================================================= */
 
 function chronologicalValue(
   entry
@@ -2204,23 +2479,14 @@ function chronologicalValue(
     ) || 0;
 
 
-  if (
+  return (
     entry.era === "BCE"
-  ) {
-
-    return -year;
-
-  }
-
-
-  return year;
+      ? -year
+      : year
+  );
 
 }
 
-
-/* =========================================================
-   CATEGORY NAME
-========================================================= */
 
 function getCategoryName(
   categoryId
@@ -2228,8 +2494,8 @@ function getCategoryName(
 
   const category =
     categories.find(
-      category =>
-        Number(category.id) ===
+      item =>
+        Number(item.id) ===
         Number(categoryId)
     );
 
@@ -2241,17 +2507,13 @@ function getCategoryName(
 }
 
 
-/* =========================================================
-   CATEGORY LOOKUP BY NAME
-========================================================= */
-
 function findCategoryByName(
   name
 ) {
 
   return categories.find(
-    category =>
-      category.name
+    item =>
+      item.name
         .trim()
         .toLowerCase() ===
       name
@@ -2262,10 +2524,6 @@ function findCategoryByName(
 }
 
 
-/* =========================================================
-   GET OR CREATE CATEGORY
-========================================================= */
-
 async function getOrCreateCategory(
   name
 ) {
@@ -2275,9 +2533,7 @@ async function getOrCreateCategory(
 
 
   if (category) {
-
     return category;
-
   }
 
 
@@ -2290,21 +2546,264 @@ async function getOrCreateCategory(
   await loadCategories();
 
 
-  category =
-    categories.find(
-      category =>
-        category.id === id
+  return categories.find(
+    item =>
+      item.id === id
+  );
+
+}
+
+
+function getEntry(
+  id
+) {
+
+  return entries.find(
+    entry =>
+      Number(entry.id) ===
+      Number(id)
+  );
+
+}
+
+
+function getChildren(
+  parentId
+) {
+
+  return entries.filter(
+    entry =>
+      Number(entry.parentId || 0) ===
+      Number(parentId || 0)
+  );
+
+}
+
+
+function hasChildren(
+  id
+) {
+
+  return entries.some(
+    entry =>
+      Number(entry.parentId) ===
+      Number(id)
+  );
+
+}
+
+
+function compareSiblingEntries(
+  a,
+  b
+) {
+
+  const aOrder =
+    Number(
+      a.sortOrder
+    ) || 0;
+
+
+  const bOrder =
+    Number(
+      b.sortOrder
+    ) || 0;
+
+
+  if (
+    aOrder !== bOrder
+  ) {
+
+    return (
+      aOrder -
+      bOrder
     );
 
+  }
 
-  return category;
+
+  const dateDifference =
+    chronologicalValue(a) -
+    chronologicalValue(b);
+
+
+  if (
+    dateDifference !== 0
+  ) {
+
+    return dateDifference;
+
+  }
+
+
+  return a.name.localeCompare(
+    b.name
+  );
+
+}
+
+
+function getSortedChildren(
+  parentId
+) {
+
+  return getChildren(
+    parentId
+  ).sort(
+    compareSiblingEntries
+  );
 
 }
 
 
 /* =========================================================
-   SEARCH / FILTER
+   DESCENDANTS
 ========================================================= */
+
+function getDescendantIds(
+  id
+) {
+
+  const result =
+    [];
+
+
+  function walk(
+    parentId
+  ) {
+
+    getChildren(
+      parentId
+    ).forEach(
+      child => {
+
+        result.push(
+          child.id
+        );
+
+        walk(
+          child.id
+        );
+
+      }
+    );
+
+  }
+
+
+  walk(id);
+
+
+  return result;
+
+}
+
+
+/* =========================================================
+   PARENT PATH
+========================================================= */
+
+function getParentPath(
+  entry
+) {
+
+  const names =
+    [];
+
+
+  let current =
+    entry;
+
+
+  let safety =
+    0;
+
+
+  while (
+    current &&
+    current.parentId &&
+    safety < 100
+  ) {
+
+    const parent =
+      getEntry(
+        current.parentId
+      );
+
+
+    if (!parent) {
+      break;
+    }
+
+
+    names.unshift(
+      parent.name
+    );
+
+
+    current =
+      parent;
+
+
+    safety++;
+
+  }
+
+
+  return names;
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function searchMatches(
+  entry,
+  search
+) {
+
+  const category =
+    getCategoryName(
+      entry.categoryId
+    );
+
+
+  return (
+
+    entry.name
+      .toLowerCase()
+      .includes(search)
+
+    ||
+
+    (
+      entry.description ||
+      ""
+    )
+      .toLowerCase()
+      .includes(search)
+
+    ||
+
+    (
+      entry.dateLabel ||
+      ""
+    )
+      .toLowerCase()
+      .includes(search)
+
+    ||
+
+    category
+      .toLowerCase()
+      .includes(search)
+
+  );
+
+}
+
 
 function getFilteredEntries() {
 
@@ -2323,10 +2822,8 @@ function getFilteredEntries() {
 
 
   if (
-    currentView !==
-      "timeline" &&
-    currentView !==
-      "all"
+    currentView !== "timeline" &&
+    currentView !== "all"
   ) {
 
     list =
@@ -2347,55 +2844,11 @@ function getFilteredEntries() {
 
     list =
       list.filter(
-        entry => {
-
-          const category =
-            getCategoryName(
-              entry.categoryId
-            );
-
-
-          return (
-
-            entry.name
-              .toLowerCase()
-              .includes(
-                search
-              )
-
-            ||
-
-            (
-              entry.description ||
-              ""
-            )
-              .toLowerCase()
-              .includes(
-                search
-              )
-
-            ||
-
-            (
-              entry.dateLabel ||
-              ""
-            )
-              .toLowerCase()
-              .includes(
-                search
-              )
-
-            ||
-
-            category
-              .toLowerCase()
-              .includes(
-                search
-              )
-
-          );
-
-        }
+        entry =>
+          searchMatches(
+            entry,
+            search
+          )
       );
 
   }
@@ -2407,7 +2860,7 @@ function getFilteredEntries() {
 
 
 /* =========================================================
-   RENDER TABS
+   TABS
 ========================================================= */
 
 function renderTabs() {
@@ -2475,9 +2928,11 @@ function renderTabs() {
             }"
             data-view="${category.id}"
           >
+
             ${escapeHTML(
               category.name
             )}
+
           </button>
 
         `;
@@ -2530,18 +2985,13 @@ function render() {
     );
 
 
-  const list =
-    getFilteredEntries();
-
-
   if (
     currentView ===
     "timeline"
   ) {
 
     renderTimeline(
-      container,
-      list
+      container
     );
 
   }
@@ -2550,10 +3000,49 @@ function render() {
 
     renderList(
       container,
-      list
+      getFilteredEntries()
     );
 
   }
+
+}
+
+
+/* =========================================================
+   TIMELINE SEARCH SUPPORT
+========================================================= */
+
+function treeContainsSearch(
+  entry,
+  search
+) {
+
+  if (
+    !search
+  ) {
+    return true;
+  }
+
+
+  if (
+    searchMatches(
+      entry,
+      search
+    )
+  ) {
+    return true;
+  }
+
+
+  return getChildren(
+    entry.id
+  ).some(
+    child =>
+      treeContainsSearch(
+        child,
+        search
+      )
+  );
 
 }
 
@@ -2563,32 +3052,35 @@ function render() {
 ========================================================= */
 
 function renderTimeline(
-  container,
-  list
+  container
 ) {
 
-  list.sort(
-    (a,b) => {
-
-      const difference =
-        chronologicalValue(a) -
-        chronologicalValue(b);
-
-
-      if (difference !== 0) {
-        return difference;
-      }
+  const search =
+    document
+      .getElementById(
+        "searchInput"
+      )
+      .value
+      .trim()
+      .toLowerCase();
 
 
-      return a.name.localeCompare(
-        b.name
+  const roots =
+    getSortedChildren(
+      null
+    )
+      .filter(
+        entry =>
+          treeContainsSearch(
+            entry,
+            search
+          )
       );
 
-    }
-  );
 
-
-  if (!list.length) {
+  if (
+    !roots.length
+  ) {
 
     container.innerHTML = `
 
@@ -2598,7 +3090,8 @@ function renderTimeline(
           Your timeline is empty
         </div>
 
-        Add entries manually or use Bulk Import.
+        Add a major historical topic, then place
+        subevents underneath it.
 
       </div>
 
@@ -2610,117 +3103,46 @@ function renderTimeline(
 
 
   let html =
-    `<div class="timeline">`;
+    `<div class="timelineRoot">`;
 
 
-  list.forEach(
-    entry => {
+  roots.forEach(
+    (entry,index) => {
 
-      const category =
-        getCategoryName(
-          entry.categoryId
-        );
+      if (
+        index > 0
+      ) {
 
+        html += `
 
-      const photoCount =
-        entry.photos?.length ||
-        0;
+          <div class="dateDivider">
 
+            <div class="dateDividerLine"></div>
 
-      html += `
+            <div class="dateDividerText">
+              ${escapeHTML(
+                entry.dateLabel ||
+                formatTimelineYear(
+                  entry
+                )
+              )}
+            </div>
 
-        <div class="timelineItem">
-
-          <div class="timelineDot"></div>
-
-
-          <div class="itemCard">
-
-            <button
-              class="itemCardButton"
-              onclick="showDetails(${entry.id})"
-            >
-
-              <div class="cardTop">
-
-                <div>
-
-                  <div class="typeBadge">
-                    ${escapeHTML(
-                      category
-                    )}
-                  </div>
-
-
-                  <div class="cardTitle">
-                    ${escapeHTML(
-                      entry.name
-                    )}
-                  </div>
-
-
-                  <div class="cardDate">
-                    ${escapeHTML(
-                      entry.dateLabel ||
-                      ""
-                    )}
-                  </div>
-
-                </div>
-
-
-                ${
-                  photoCount
-
-                  ? `
-
-                    <div class="photoIndicator">
-                      📷 ${photoCount}
-                    </div>
-
-                  `
-
-                  : ""
-                }
-
-              </div>
-
-
-              ${
-                entry.description
-
-                ? `
-
-                  <div class="previewText">
-
-                    ${escapeHTML(
-                      entry.description.length >
-                      150
-
-                      ? entry.description
-                          .substring(
-                            0,
-                            150
-                          ) +
-                        "…"
-
-                      : entry.description
-                    )}
-
-                  </div>
-
-                `
-
-                : ""
-              }
-
-            </button>
+            <div class="dateDividerLine"></div>
 
           </div>
 
-        </div>
+        `;
 
-      `;
+      }
+
+
+      html +=
+        renderTimelineEntry(
+          entry,
+          0,
+          search
+        );
 
     }
   );
@@ -2737,7 +3159,331 @@ function renderTimeline(
 
 
 /* =========================================================
-   CATEGORY / ALL LIST
+   RECURSIVE TIMELINE ENTRY
+========================================================= */
+
+function renderTimelineEntry(
+  entry,
+  depth,
+  search
+) {
+
+  if (
+    search &&
+    !treeContainsSearch(
+      entry,
+      search
+    )
+  ) {
+
+    return "";
+
+  }
+
+
+  const category =
+    getCategoryName(
+      entry.categoryId
+    );
+
+
+  const children =
+    getSortedChildren(
+      entry.id
+    )
+      .filter(
+        child =>
+          treeContainsSearch(
+            child,
+            search
+          )
+      );
+
+
+  const photoCount =
+    entry.photos?.length ||
+    0;
+
+
+  const preview =
+    entry.description
+      ? (
+          entry.description.length >
+          135
+            ? entry.description.substring(
+                0,
+                135
+              ) + "…"
+            : entry.description
+        )
+      : "";
+
+
+  if (
+    depth === 0
+  ) {
+
+    let html = `
+
+      <div
+        class="timelineEntry level0"
+      >
+
+        <div
+          class="majorCard ${
+            children.length
+              ? "hasChildren"
+              : ""
+          }"
+        >
+
+          <button
+            class="majorHeader"
+            onclick="showDetails(${entry.id})"
+          >
+
+            <div class="majorCategory">
+              ${escapeHTML(
+                category
+              )}
+            </div>
+
+            <div class="majorTitle">
+              ${escapeHTML(
+                entry.name
+              )}
+            </div>
+
+            <div class="majorDate">
+
+              ${escapeHTML(
+                entry.dateLabel ||
+                formatTimelineYear(
+                  entry
+                )
+              )}
+
+            </div>
+
+            ${
+              preview
+
+              ? `
+
+                <div class="majorPreview">
+                  ${escapeHTML(
+                    preview
+                  )}
+                </div>
+
+              `
+
+              : ""
+            }
+
+          </button>
+
+        </div>
+
+    `;
+
+
+    if (
+      children.length
+    ) {
+
+      html += `
+
+        <div class="childrenContainer">
+
+      `;
+
+
+      children.forEach(
+        child => {
+
+          html +=
+            renderTimelineEntry(
+              child,
+              depth + 1,
+              search
+            );
+
+        }
+      );
+
+
+      html +=
+        `</div>`;
+
+    }
+
+
+    html +=
+      `</div>`;
+
+
+    return html;
+
+  }
+
+
+  let html = `
+
+    <div
+      class="
+        timelineEntry
+        childEntry
+        depth${Math.min(
+          depth,
+          5
+        )}
+      "
+    >
+
+      <div class="childDot"></div>
+
+      <div class="childCard">
+
+        <button
+          class="childCardButton"
+          onclick="showDetails(${entry.id})"
+        >
+
+          <div class="childCardTop">
+
+            <div>
+
+              <div class="childCategory">
+                ${escapeHTML(
+                  category
+                )}
+              </div>
+
+              <div class="childTitle">
+                ${escapeHTML(
+                  entry.name
+                )}
+              </div>
+
+              <div class="childDate">
+
+                ${escapeHTML(
+                  entry.dateLabel ||
+                  formatTimelineYear(
+                    entry
+                  )
+                )}
+
+              </div>
+
+            </div>
+
+            ${
+              photoCount
+
+              ? `
+
+                <div class="photoIndicator">
+                  📷 ${photoCount}
+                </div>
+
+              `
+
+              : ""
+            }
+
+          </div>
+
+          ${
+            preview
+
+            ? `
+
+              <div class="childPreview">
+                ${escapeHTML(
+                  preview
+                )}
+              </div>
+
+            `
+
+            : ""
+          }
+
+        </button>
+
+      </div>
+
+  `;
+
+
+  if (
+    children.length
+  ) {
+
+    html +=
+      `<div class="childrenContainer">`;
+
+
+    children.forEach(
+      child => {
+
+        html +=
+          renderTimelineEntry(
+            child,
+            depth + 1,
+            search
+          );
+
+      }
+    );
+
+
+    html +=
+      `</div>`;
+
+  }
+
+
+  html +=
+    `</div>`;
+
+
+  return html;
+
+}
+
+
+/* =========================================================
+   DATE FALLBACK
+========================================================= */
+
+function formatTimelineYear(
+  entry
+) {
+
+  if (
+    !entry.sortYear
+  ) {
+    return "";
+  }
+
+
+  return (
+    entry.sortYear +
+    " " +
+    (
+      entry.era ||
+      "CE"
+    )
+  );
+
+}
+
+
+/* =========================================================
+   LIST VIEW
 ========================================================= */
 
 function renderList(
@@ -2758,22 +3504,21 @@ function renderList(
 
 
   if (
-    currentView !== "all"
+    currentView !==
+    "all"
   ) {
 
     const category =
       categories.find(
-        category =>
-          String(category.id) ===
+        item =>
+          String(item.id) ===
           String(currentView)
       );
 
 
     if (category) {
-
       heading =
         category.name;
-
     }
 
   }
@@ -2790,7 +3535,9 @@ function renderList(
   `;
 
 
-  if (!list.length) {
+  if (
+    !list.length
+  ) {
 
     html += `
 
@@ -2800,7 +3547,7 @@ function renderList(
           No entries
         </div>
 
-        Tap + or use Bulk Import.
+        Tap + to add one.
 
       </div>
 
@@ -2811,6 +3558,12 @@ function renderList(
 
   list.forEach(
     entry => {
+
+      const path =
+        getParentPath(
+          entry
+        );
+
 
       html += `
 
@@ -2826,7 +3579,6 @@ function renderList(
               )}
             </div>
 
-
             <div class="listMeta">
 
               ${escapeHTML(
@@ -2837,16 +3589,35 @@ function renderList(
 
               ${
                 entry.dateLabel
-
-                ? " • " +
-                  escapeHTML(
-                    entry.dateLabel
-                  )
-
-                : ""
+                  ? " • " +
+                    escapeHTML(
+                      entry.dateLabel
+                    )
+                  : ""
               }
 
             </div>
+
+            ${
+              path.length
+
+              ? `
+
+                <div class="listParent">
+
+                  Under:
+                  ${escapeHTML(
+                    path.join(
+                      " › "
+                    )
+                  )}
+
+                </div>
+
+              `
+
+              : ""
+            }
 
           </button>
 
@@ -2868,13 +3639,12 @@ function renderList(
    DETAILS
 ========================================================= */
 
-function showDetails(id) {
+function showDetails(
+  id
+) {
 
   const entry =
-    entries.find(
-      entry =>
-        entry.id === id
-    );
+    getEntry(id);
 
 
   if (!entry) {
@@ -2885,6 +3655,12 @@ function showDetails(id) {
   const category =
     getCategoryName(
       entry.categoryId
+    );
+
+
+  const path =
+    getParentPath(
+      entry
     );
 
 
@@ -2902,8 +3678,8 @@ function showDetails(id) {
       <div class="gallery">
 
         <div
-          class="galleryTrack"
           id="galleryTrack"
+          class="galleryTrack"
         >
 
     `;
@@ -2934,10 +3710,12 @@ function showDetails(id) {
         </div>
 
         <div
-          class="galleryCount"
           id="galleryCount"
+          class="galleryCount"
         >
+
           1 / ${entry.photos.length}
+
         </div>
 
       </div>
@@ -2959,21 +3737,42 @@ function showDetails(id) {
         )}
       </div>
 
-
       <div class="detailTitle">
         ${escapeHTML(
           entry.name
         )}
       </div>
 
-
       <div class="detailDate">
+
         ${escapeHTML(
           entry.dateLabel ||
-          ""
+          formatTimelineYear(
+            entry
+          )
         )}
+
       </div>
 
+      ${
+        path.length
+
+        ? `
+
+          <div class="detailParent">
+
+            ${escapeHTML(
+              path.join(
+                " › "
+              )
+            )}
+
+          </div>
+
+        `
+
+        : ""
+      }
 
       <button
         class="editMiniButton"
@@ -2988,16 +3787,36 @@ function showDetails(id) {
     ${galleryHTML}
 
 
+    <div class="detailActions">
+
+      <button
+        class="secondaryButton"
+        onclick="openMoveEntry(${entry.id})"
+      >
+        Move / Reorder
+      </button>
+
+      <button
+        class="secondaryButton"
+        onclick="addChildEntry(${entry.id})"
+      >
+        + Add Subevent
+      </button>
+
+    </div>
+
+
     <div class="descriptionHeading">
       Significance
     </div>
 
-
     <div class="detailDescription">
+
       ${escapeHTML(
         entry.description ||
         "No description added yet."
       )}
+
     </div>
 
   `;
@@ -3014,7 +3833,9 @@ function showDetails(id) {
     );
 
 
-  if (gallery) {
+  if (
+    gallery
+  ) {
 
     gallery.addEventListener(
       "scroll",
@@ -3093,11 +3914,143 @@ function populateCategoryDropdown() {
 
 
 /* =========================================================
-   ENTRY EDITOR
+   PARENT SELECT
+========================================================= */
+
+function buildParentOptions(
+  select,
+  excludedId = null
+) {
+
+  const excluded =
+    excludedId
+      ? new Set([
+          Number(
+            excludedId
+          ),
+          ...getDescendantIds(
+            excludedId
+          )
+            .map(Number)
+        ])
+      : new Set();
+
+
+  select.innerHTML = `
+
+    <option value="">
+      — Top Level —
+    </option>
+
+  `;
+
+
+  const roots =
+    getSortedChildren(
+      null
+    );
+
+
+  function addOptions(
+    items,
+    depth
+  ) {
+
+    items.forEach(
+      item => {
+
+        if (
+          excluded.has(
+            Number(item.id)
+          )
+        ) {
+          return;
+        }
+
+
+        const option =
+          document.createElement(
+            "option"
+          );
+
+
+        option.value =
+          item.id;
+
+
+        option.textContent =
+          `${"— ".repeat(depth)}${item.name}`;
+
+
+        select.appendChild(
+          option
+        );
+
+
+        addOptions(
+          getSortedChildren(
+            item.id
+          ),
+          depth + 1
+        );
+
+      }
+    );
+
+  }
+
+
+  addOptions(
+    roots,
+    0
+  );
+
+}
+
+
+/* =========================================================
+   NEXT SORT ORDER
+========================================================= */
+
+function getNextSortOrder(
+  parentId
+) {
+
+  const siblings =
+    getChildren(
+      parentId
+    );
+
+
+  if (
+    !siblings.length
+  ) {
+    return 10;
+  }
+
+
+  return (
+    Math.max(
+      ...siblings.map(
+        entry =>
+          Number(
+            entry.sortOrder
+          ) || 0
+      )
+    )
+    + 10
+  );
+
+}
+
+
+/* =========================================================
+   EDITOR
 ========================================================= */
 
 function openEditor(
-  id = null
+  id = null,
+  presetParentId = null
 ) {
 
   closeModal(
@@ -3108,13 +4061,21 @@ function openEditor(
   populateCategoryDropdown();
 
 
-  const form =
+  const parentSelect =
     document.getElementById(
-      "entryForm"
+      "parentEntry"
     );
 
 
-  form.reset();
+  buildParentOptions(
+    parentSelect,
+    id
+  );
+
+
+  document.getElementById(
+    "entryForm"
+  ).reset();
 
 
   editingPhotos =
@@ -3123,7 +4084,8 @@ function openEditor(
 
   document.getElementById(
     "entryId"
-  ).value = "";
+  ).value =
+    "";
 
 
   document.getElementById(
@@ -3142,13 +4104,20 @@ function openEditor(
       : "none";
 
 
-  if (id) {
+  document.getElementById(
+    "moveFromEditorButton"
+  ).style.display =
+    id
+      ? "block"
+      : "none";
+
+
+  if (
+    id
+  ) {
 
     const entry =
-      entries.find(
-        entry =>
-          entry.id === id
-      );
+      getEntry(id);
 
 
     if (!entry) {
@@ -3172,6 +4141,13 @@ function openEditor(
       "entryName"
     ).value =
       entry.name;
+
+
+    document.getElementById(
+      "parentEntry"
+    ).value =
+      entry.parentId ||
+      "";
 
 
     document.getElementById(
@@ -3211,12 +4187,41 @@ function openEditor(
 
   }
 
+  else {
+
+    if (
+      presetParentId
+    ) {
+
+      parentSelect.value =
+        presetParentId;
+
+    }
+
+  }
+
 
   renderPhotoPreviews();
 
 
   openModal(
     "editorOverlay"
+  );
+
+}
+
+
+/* =========================================================
+   ADD CHILD
+========================================================= */
+
+function addChildEntry(
+  parentId
+) {
+
+  openEditor(
+    null,
+    parentId
   );
 
 }
@@ -3265,11 +4270,9 @@ document.getElementById(
 );
 
 
-/* =========================================================
-   IMAGE RESIZE
-========================================================= */
-
-function resizeImage(file) {
+function resizeImage(
+  file
+) {
 
   return new Promise(
     (resolve,reject) => {
@@ -3306,7 +4309,8 @@ function resizeImage(file) {
               ) {
 
                 height *=
-                  MAX / width;
+                  MAX /
+                  width;
 
 
                 width =
@@ -3319,7 +4323,8 @@ function resizeImage(file) {
               ) {
 
                 width *=
-                  MAX / height;
+                  MAX /
+                  height;
 
 
                 height =
@@ -3395,10 +4400,6 @@ function resizeImage(file) {
 }
 
 
-/* =========================================================
-   PHOTO PREVIEW
-========================================================= */
-
 function renderPhotoPreviews() {
 
   const grid =
@@ -3451,7 +4452,7 @@ function removeEditingPhoto(
 
 
 /* =========================================================
-   SAVE ENTRY FORM
+   SAVE ENTRY
 ========================================================= */
 
 document.getElementById(
@@ -3463,13 +4464,78 @@ document.getElementById(
     event.preventDefault();
 
 
-    const id =
+    const idValue =
       document.getElementById(
         "entryId"
       ).value;
 
 
+    const parentValue =
+      document.getElementById(
+        "parentEntry"
+      ).value;
+
+
+    const newParentId =
+      parentValue
+        ? Number(
+            parentValue
+          )
+        : null;
+
+
+    let existing =
+      null;
+
+
+    if (
+      idValue
+    ) {
+
+      existing =
+        getEntry(
+          Number(
+            idValue
+          )
+        );
+
+    }
+
+
+    let sortOrder =
+      existing
+        ? existing.sortOrder
+        : getNextSortOrder(
+            newParentId
+          );
+
+
+    if (
+      existing &&
+      Number(
+        existing.parentId || 0
+      ) !==
+      Number(
+        newParentId || 0
+      )
+    ) {
+
+      sortOrder =
+        getNextSortOrder(
+          newParentId
+        );
+
+    }
+
+
     const entry = {
+
+      id:
+        idValue
+          ? Number(
+              idValue
+            )
+          : undefined,
 
       categoryId:
         Number(
@@ -3484,6 +4550,11 @@ document.getElementById(
         )
         .value
         .trim(),
+
+      parentId:
+        newParentId,
+
+      sortOrder,
 
       dateLabel:
         document.getElementById(
@@ -3520,10 +4591,11 @@ document.getElementById(
     };
 
 
-    if (id) {
+    if (
+      !entry.id
+    ) {
 
-      entry.id =
-        Number(id);
+      delete entry.id;
 
     }
 
@@ -3570,6 +4642,24 @@ document.getElementById(
     }
 
 
+    const children =
+      getChildren(id);
+
+
+    if (
+      children.length
+    ) {
+
+      alert(
+        `This entry contains ${children.length} direct subevent(s).
+
+Move or delete those subevents before deleting this entry.`
+      );
+
+      return;
+    }
+
+
     if (
       !confirm(
         "Delete this historical entry?"
@@ -3599,7 +4689,394 @@ document.getElementById(
 
 
 /* =========================================================
-   CATEGORY LIST
+   MOVE ENTRY
+========================================================= */
+
+function openMoveEntry(
+  id
+) {
+
+  const entry =
+    getEntry(id);
+
+
+  if (!entry) {
+    return;
+  }
+
+
+  closeModal(
+    "detailOverlay"
+  );
+
+
+  closeModal(
+    "editorOverlay"
+  );
+
+
+  document.getElementById(
+    "moveEntryId"
+  ).value =
+    entry.id;
+
+
+  const path =
+    getParentPath(
+      entry
+    );
+
+
+  document.getElementById(
+    "moveEntryInfo"
+  ).innerHTML = `
+
+    <div class="moveTitle">
+      ${escapeHTML(
+        entry.name
+      )}
+    </div>
+
+    <div class="moveMeta">
+
+      ${escapeHTML(
+        entry.dateLabel ||
+        formatTimelineYear(
+          entry
+        )
+      )}
+
+    </div>
+
+    ${
+      path.length
+
+      ? `
+
+        <div class="hierarchyPath">
+
+          Current:
+          ${escapeHTML(
+            path.join(
+              " › "
+            )
+          )}
+
+        </div>
+
+      `
+
+      : `
+
+        <div class="hierarchyPath">
+          Current: Top Level
+        </div>
+
+      `
+    }
+
+  `;
+
+
+  const select =
+    document.getElementById(
+      "moveParentSelect"
+    );
+
+
+  buildParentOptions(
+    select,
+    id
+  );
+
+
+  select.value =
+    entry.parentId ||
+    "";
+
+
+  openModal(
+    "moveOverlay"
+  );
+
+}
+
+
+document.getElementById(
+  "moveFromEditorButton"
+).addEventListener(
+  "click",
+  () => {
+
+    const id =
+      Number(
+        document.getElementById(
+          "entryId"
+        ).value
+      );
+
+
+    if (
+      id
+    ) {
+
+      openMoveEntry(
+        id
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   APPLY NEW PARENT
+========================================================= */
+
+document.getElementById(
+  "saveMoveParentButton"
+).addEventListener(
+  "click",
+  async () => {
+
+    const id =
+      Number(
+        document.getElementById(
+          "moveEntryId"
+        ).value
+      );
+
+
+    const entry =
+      getEntry(id);
+
+
+    if (!entry) {
+      return;
+    }
+
+
+    const value =
+      document.getElementById(
+        "moveParentSelect"
+      ).value;
+
+
+    const newParentId =
+      value
+        ? Number(value)
+        : null;
+
+
+    if (
+      Number(
+        entry.parentId || 0
+      ) ===
+      Number(
+        newParentId || 0
+      )
+    ) {
+
+      closeModal(
+        "moveOverlay"
+      );
+
+      return;
+
+    }
+
+
+    entry.parentId =
+      newParentId;
+
+
+    entry.sortOrder =
+      getNextSortOrder(
+        newParentId
+      );
+
+
+    entry.updated =
+      Date.now();
+
+
+    await saveEntry(
+      entry
+    );
+
+
+    await loadEntries();
+
+
+    closeModal(
+      "moveOverlay"
+    );
+
+
+    render();
+
+  }
+);
+
+
+/* =========================================================
+   REORDER SIBLING
+========================================================= */
+
+async function moveSibling(
+  id,
+  direction
+) {
+
+  const entry =
+    getEntry(id);
+
+
+  if (!entry) {
+    return;
+  }
+
+
+  const siblings =
+    getSortedChildren(
+      entry.parentId
+    );
+
+
+  const index =
+    siblings.findIndex(
+      item =>
+        Number(item.id) ===
+        Number(id)
+    );
+
+
+  if (
+    index < 0
+  ) {
+    return;
+  }
+
+
+  const targetIndex =
+    index +
+    direction;
+
+
+  if (
+    targetIndex < 0 ||
+    targetIndex >=
+      siblings.length
+  ) {
+    return;
+  }
+
+
+  /*
+    Normalize sibling ordering first.
+  */
+
+  siblings.forEach(
+    (item,i) => {
+
+      item.sortOrder =
+        (i + 1) *
+        10;
+
+    }
+  );
+
+
+  const target =
+    siblings[
+      targetIndex
+    ];
+
+
+  const temp =
+    entry.sortOrder;
+
+
+  entry.sortOrder =
+    target.sortOrder;
+
+
+  target.sortOrder =
+    temp;
+
+
+  await saveEntry(
+    entry
+  );
+
+
+  await saveEntry(
+    target
+  );
+
+
+  await loadEntries();
+
+
+  render();
+
+
+  openMoveEntry(
+    id
+  );
+
+}
+
+
+document.getElementById(
+  "moveUpButton"
+).addEventListener(
+  "click",
+  () => {
+
+    const id =
+      Number(
+        document.getElementById(
+          "moveEntryId"
+        ).value
+      );
+
+
+    moveSibling(
+      id,
+      -1
+    );
+
+  }
+);
+
+
+document.getElementById(
+  "moveDownButton"
+).addEventListener(
+  "click",
+  () => {
+
+    const id =
+      Number(
+        document.getElementById(
+          "moveEntryId"
+        ).value
+      );
+
+
+    moveSibling(
+      id,
+      1
+    );
+
+  }
+);
+
+
+/* =========================================================
+   CATEGORY MANAGER
 ========================================================= */
 
 function renderCategoryList() {
@@ -3610,12 +5087,17 @@ function renderCategoryList() {
     );
 
 
-  if (!categories.length) {
+  if (
+    !categories.length
+  ) {
 
-    container.innerHTML =
-      `<div style="color:var(--gray);">
+    container.innerHTML = `
+
+      <div style="color:var(--gray);">
         No categories yet.
-      </div>`;
+      </div>
+
+    `;
 
     return;
 
@@ -3638,11 +5120,12 @@ function renderCategoryList() {
           <div class="categoryRow">
 
             <div class="categoryName">
+
               ${escapeHTML(
                 category.name
               )}
-            </div>
 
+            </div>
 
             <button
               class="smallAction"
@@ -3650,7 +5133,6 @@ function renderCategoryList() {
             >
               Rename
             </button>
-
 
             <button
               class="smallAction smallDanger"
@@ -3739,8 +5221,8 @@ async function renameCategory(
 
   const category =
     categories.find(
-      category =>
-        category.id === id
+      item =>
+        item.id === id
     );
 
 
@@ -3792,8 +5274,8 @@ async function removeCategory(
 
   const category =
     categories.find(
-      category =>
-        category.id === id
+      item =>
+        item.id === id
     );
 
 
@@ -3812,7 +5294,9 @@ async function removeCategory(
     );
 
 
-  if (used.length) {
+  if (
+    used.length
+  ) {
 
     alert(
       `"${category.name}" contains ${used.length} entries.
@@ -3856,7 +5340,7 @@ Move or delete those entries before deleting the category.`
 
 
 /* =========================================================
-   BULK IMPORT PARSER
+   BULK PARSER
 ========================================================= */
 
 function parseBulkImport(
@@ -3888,10 +5372,6 @@ function parseBulkImport(
         index + 1;
 
 
-      /*
-        Allow an optional heading row.
-      */
-
       if (
         line
           .toLowerCase()
@@ -3899,9 +5379,7 @@ function parseBulkImport(
             "category |"
           )
       ) {
-
         return;
-
       }
 
 
@@ -3915,11 +5393,11 @@ function parseBulkImport(
 
 
       if (
-        parts.length < 6
+        parts.length < 7
       ) {
 
         errors.push(
-          `Line ${lineNumber}: Expected 6 fields separated by |`
+          `Line ${lineNumber}: Expected 7 fields separated by |`
         );
 
         return;
@@ -3950,16 +5428,13 @@ function parseBulkImport(
           .toUpperCase();
 
 
-      /*
-        If a description ever accidentally
-        contains an extra | character,
-        join everything after field 5
-        back together as the description.
-      */
+      const parentName =
+        parts[5];
+
 
       const description =
         parts
-          .slice(5)
+          .slice(6)
           .join(" | ")
           .trim();
 
@@ -4029,6 +5504,8 @@ function parseBulkImport(
 
         era,
 
+        parentName,
+
         description
 
       });
@@ -4038,18 +5515,15 @@ function parseBulkImport(
 
 
   return {
-
     entries: results,
-
     errors
-
   };
 
 }
 
 
 /* =========================================================
-   BULK IMPORT PREVIEW
+   BULK PREVIEW
 ========================================================= */
 
 document.getElementById(
@@ -4114,12 +5588,15 @@ document.getElementById(
       html += `
 
         <div class="sectionHeading">
+
           ${parsed.entries.length}
+
           ${
             parsed.entries.length === 1
-            ? "Entry"
-            : "Entries"
+              ? "Entry"
+              : "Entries"
           }
+
         </div>
 
       `;
@@ -4133,9 +5610,11 @@ document.getElementById(
             <div class="importPreviewCard">
 
               <div class="importPreviewTitle">
+
                 ${escapeHTML(
                   entry.name
                 )}
+
               </div>
 
               <div class="importPreviewMeta">
@@ -4150,10 +5629,16 @@ document.getElementById(
                   entry.dateLabel
                 )}
 
-                •
+                ${
+                  entry.parentName
 
-                ${entry.sortYear}
-                ${entry.era}
+                  ? " • Under: " +
+                    escapeHTML(
+                      entry.parentName
+                    )
+
+                  : " • Top Level"
+                }
 
               </div>
 
@@ -4167,28 +5652,6 @@ document.getElementById(
     }
 
 
-    if (
-      !parsed.entries.length &&
-      !parsed.errors.length
-    ) {
-
-      html = `
-
-        <div class="empty">
-
-          <div class="emptyTitle">
-            Nothing to import
-          </div>
-
-          Paste historical entries above.
-
-        </div>
-
-      `;
-
-    }
-
-
     preview.innerHTML =
       html;
 
@@ -4197,16 +5660,15 @@ document.getElementById(
       parsed.entries.length &&
       !parsed.errors.length
 
-      ? "block"
-
-      : "none";
+        ? "block"
+        : "none";
 
   }
 );
 
 
 /* =========================================================
-   CONFIRM BULK IMPORT
+   BULK IMPORT
 ========================================================= */
 
 document.getElementById(
@@ -4226,6 +5688,19 @@ document.getElementById(
       pendingBulkEntries.length;
 
 
+    /*
+      First pass:
+      create all entries as top-level.
+
+      This ensures parents can be created even if
+      children appear before them in the pasted list.
+    */
+
+
+    const newlyCreated =
+      [];
+
+
     for (
       const imported
       of pendingBulkEntries
@@ -4237,37 +5712,165 @@ document.getElementById(
         );
 
 
-      const entry = {
+      const id =
+        await saveEntry({
 
-        categoryId:
-          category.id,
+          categoryId:
+            category.id,
 
-        name:
-          imported.name,
+          name:
+            imported.name,
 
-        dateLabel:
-          imported.dateLabel,
+          parentId:
+            null,
 
-        sortYear:
-          imported.sortYear,
+          sortOrder:
+            getNextSortOrder(
+              null
+            ),
 
-        era:
-          imported.era,
+          dateLabel:
+            imported.dateLabel,
 
-        description:
-          imported.description,
+          sortYear:
+            imported.sortYear,
 
-        photos: [],
+          era:
+            imported.era,
 
-        updated:
-          Date.now()
+          description:
+            imported.description,
 
-      };
+          photos: [],
+
+          updated:
+            Date.now()
+
+        });
 
 
-      await saveEntry(
-        entry
-      );
+      newlyCreated.push({
+
+        id,
+
+        imported
+
+      });
+
+
+      await loadEntries();
+
+    }
+
+
+    /*
+      Second pass:
+      assign parents.
+    */
+
+
+    for (
+      const item
+      of newlyCreated
+    ) {
+
+      const imported =
+        item.imported;
+
+
+      if (
+        !imported.parentName
+      ) {
+        continue;
+      }
+
+
+      /*
+        Prefer a parent created in this import.
+      */
+
+      let parent =
+        newlyCreated.find(
+          candidate =>
+            candidate.imported.name
+              .trim()
+              .toLowerCase() ===
+            imported.parentName
+              .trim()
+              .toLowerCase()
+        );
+
+
+      let parentId =
+        parent
+          ? parent.id
+          : null;
+
+
+      /*
+        Otherwise look in the existing database.
+      */
+
+      if (
+        !parentId
+      ) {
+
+        const existing =
+          entries.find(
+            entry =>
+              entry.name
+                .trim()
+                .toLowerCase() ===
+              imported.parentName
+                .trim()
+                .toLowerCase()
+          );
+
+
+        if (
+          existing
+        ) {
+          parentId =
+            existing.id;
+        }
+
+      }
+
+
+      if (
+        parentId
+      ) {
+
+        const entry =
+          getEntry(
+            item.id
+          );
+
+
+        if (
+          entry
+        ) {
+
+          entry.parentId =
+            parentId;
+
+
+          entry.sortOrder =
+            getNextSortOrder(
+              parentId
+            );
+
+
+          await saveEntry(
+            entry
+          );
+
+
+          await loadEntries();
+
+        }
+
+      }
 
     }
 
@@ -4284,12 +5887,14 @@ document.getElementById(
 
     document.getElementById(
       "bulkImportText"
-    ).value = "";
+    ).value =
+      "";
 
 
     document.getElementById(
       "bulkImportPreview"
-    ).innerHTML = "";
+    ).innerHTML =
+      "";
 
 
     document.getElementById(
@@ -4310,8 +5915,8 @@ document.getElementById(
     alert(
       `${total} ${
         total === 1
-        ? "entry"
-        : "entries"
+          ? "entry"
+          : "entries"
       } imported successfully.`
     );
 
@@ -4320,7 +5925,7 @@ document.getElementById(
 
 
 /* =========================================================
-   OPEN BULK IMPORT
+   BULK IMPORT OPEN
 ========================================================= */
 
 function openBulkImport() {
@@ -4353,27 +5958,13 @@ function openBulkImport() {
 }
 
 
-document.getElementById(
-  "bulkImportTopButton"
-).addEventListener(
-  "click",
-  openBulkImport
-);
-
-
-document.getElementById(
-  "bulkImportSettingsButton"
-).addEventListener(
-  "click",
-  openBulkImport
-);
-
-
 /* =========================================================
    MODALS
 ========================================================= */
 
-function openModal(id) {
+function openModal(
+  id
+) {
 
   document
     .getElementById(id)
@@ -4385,7 +5976,9 @@ function openModal(id) {
 }
 
 
-function closeModal(id) {
+function closeModal(
+  id
+) {
 
   document
     .getElementById(id)
@@ -4452,11 +6045,24 @@ document.getElementById(
   "addButton"
 ).addEventListener(
   "click",
-  () => {
+  () =>
+    openEditor()
+);
 
-    openEditor();
 
-  }
+document.getElementById(
+  "bulkImportTopButton"
+).addEventListener(
+  "click",
+  openBulkImport
+);
+
+
+document.getElementById(
+  "bulkImportSettingsButton"
+).addEventListener(
+  "click",
+  openBulkImport
 );
 
 
@@ -4505,7 +6111,7 @@ document.getElementById(
 
 
 /* =========================================================
-   EXPORT BACKUP
+   EXPORT
 ========================================================= */
 
 document.getElementById(
@@ -4516,7 +6122,7 @@ document.getElementById(
 
     const backup = {
 
-      version: 3,
+      version: 4,
 
       created:
         new Date()
@@ -4633,9 +6239,7 @@ document.getElementById(
           "Import this backup?"
         )
       ) {
-
         return;
-
       }
 
 
@@ -4660,7 +6264,9 @@ document.getElementById(
             );
 
 
-          if (!category) {
+          if (
+            !category
+          ) {
 
             category =
               await getOrCreateCategory(
@@ -4680,10 +6286,23 @@ document.getElementById(
       }
 
 
+      /*
+        We need an ID map because imported parent IDs
+        will not match new database IDs.
+      */
+
+      const entryIdMap =
+        {};
+
+
       for (
         const importedEntry
         of data.entries
       ) {
+
+        const oldId =
+          importedEntry.id;
+
 
         const copy =
           {
@@ -4692,6 +6311,10 @@ document.getElementById(
 
 
         delete copy.id;
+
+
+        copy.parentId =
+          null;
 
 
         if (
@@ -4708,9 +6331,73 @@ document.getElementById(
         }
 
 
-        await saveEntry(
-          copy
-        );
+        const newId =
+          await saveEntry(
+            copy
+          );
+
+
+        entryIdMap[
+          oldId
+        ] =
+          newId;
+
+      }
+
+
+      await loadEntries();
+
+
+      for (
+        const importedEntry
+        of data.entries
+      ) {
+
+        if (
+          !importedEntry.parentId
+        ) {
+          continue;
+        }
+
+
+        const newId =
+          entryIdMap[
+            importedEntry.id
+          ];
+
+
+        const newParentId =
+          entryIdMap[
+            importedEntry.parentId
+          ];
+
+
+        if (
+          newId &&
+          newParentId
+        ) {
+
+          const entry =
+            getEntry(
+              newId
+            );
+
+
+          if (
+            entry
+          ) {
+
+            entry.parentId =
+              newParentId;
+
+
+            await saveEntry(
+              entry
+            );
+
+          }
+
+        }
 
       }
 
@@ -4812,9 +6499,12 @@ document.getElementById(
     transaction.oncomplete =
       async () => {
 
-        entries = [];
+        entries =
+          [];
 
-        categories = [];
+
+        categories =
+          [];
 
 
         await createDefaultCategories();
